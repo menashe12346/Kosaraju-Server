@@ -1,32 +1,22 @@
-# Compiler
 CXX = g++
+CXXFLAGS = -std=c++17 -O2
 
-# Compiler flags
-CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic -g
+all: kosaraju_deque kosaraju_list kosaraju_matrix kosaraju_vector_list main
 
-# Executable name
-TARGET = main
+kosaraju_deque: kosaraju_deque.cpp kosaraju_deque.hpp
+	$(CXX) $(CXXFLAGS) -c kosaraju_deque.cpp
 
-# Source files
-SRCS = main.cpp kosaraju.cpp
+kosaraju_list: kosaraju_list.cpp kosaraju_list.hpp
+	$(CXX) $(CXXFLAGS) -c kosaraju_list.cpp
 
-# Object files
-OBJS = $(SRCS:.cpp=.o)
+kosaraju_matrix: kosaraju_matrix.cpp kosaraju_matrix.hpp
+	$(CXX) $(CXXFLAGS) -c kosaraju_matrix.cpp
 
-# Default target
-all: $(TARGET)
+kosaraju_vector_list: kosaraju_vector_list.cpp kosaraju_vector_list.hpp
+	$(CXX) $(CXXFLAGS) -c kosaraju_vector_list.cpp
 
-# Link the executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+main: main.cpp kosaraju_deque kosaraju_list kosaraju_matrix kosaraju_vector_list
+	$(CXX) $(CXXFLAGS) -o main main.cpp kosaraju_deque.o kosaraju_list.o kosaraju_matrix.o kosaraju_vector_list.o
 
-# Compile the source files into object files
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Clean target
 clean:
-	rm -f $(OBJS) $(TARGET)
-
-# Phony targets
-.PHONY: all clean
+	rm -f *.o main

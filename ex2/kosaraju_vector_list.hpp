@@ -9,9 +9,9 @@
 
 using namespace std;
 
-class KosarajuList {
+class KosarajuVectorList {
 public:
-    KosarajuList(int n, const vector<pair<int, int>>& edges);
+    KosarajuVectorList(int n, const vector<pair<int, int>>& edges);
     void findSCCs();
     void printSCCs() const;
 

@@ -1,6 +1,6 @@
 #include "kosaraju_vector_list.hpp"
 
-KosarajuList::KosarajuList(int n, const vector<pair<int, int>>& edges) : n(n) {
+KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edges) : n(n) {
     graph.resize(n);
     transposedGraph.resize(n);
     visited.resize(n, false);
@@ -10,7 +10,7 @@ KosarajuList::KosarajuList(int n, const vector<pair<int, int>>& edges) : n(n) {
     }
 }
 
-void KosarajuList::findSCCs() {
+void KosarajuVectorList::findSCCs() {
     // First Pass
     for (int i = 0; i < n; ++i) {
         if (!visited[i]) {
@@ -31,7 +31,7 @@ void KosarajuList::findSCCs() {
     }
 }
 
-void KosarajuList::printSCCs() const {
+void KosarajuVectorList::printSCCs() const {
     cout << "Strongly Connected Components (SCCs):" << endl;
     int sccCount = 1;
     for (const auto& scc : sccs) {
@@ -43,7 +43,7 @@ void KosarajuList::printSCCs() const {
     }
 }
 
-void KosarajuList::dfsFirstPass(int node) {
+void KosarajuVectorList::dfsFirstPass(int node) {
     visited[node] = true;
     for (int neighbor : graph[node]) {
         if (!visited[neighbor]) {
@@ -53,7 +53,7 @@ void KosarajuList::dfsFirstPass(int node) {
     finishStack.push(node);
 }
 
-void KosarajuList::dfsSecondPass(int node, vector<int>& scc) {
+void KosarajuVectorList::dfsSecondPass(int node, vector<int>& scc) {
     visited[node] = true;
     scc.push_back(node);
     for (int neighbor : transposedGraph[node]) {
