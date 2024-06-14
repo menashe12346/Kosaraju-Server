@@ -15,7 +15,7 @@ kosaraju_matrix: kosaraju_matrix.cpp kosaraju_matrix.hpp
 kosaraju_vector_list: kosaraju_vector_list.cpp kosaraju_vector_list.hpp
 	$(CXX) $(CXXFLAGS) -c kosaraju_vector_list.cpp
 
-main: main.cpp kosaraju_deque kosaraju_list kosaraju_matrix kosaraju_vector_list
+main: main.cpp kosaraju_deque.o kosaraju_list.o kosaraju_matrix.o kosaraju_vector_list.o
 	$(CXX) $(CXXFLAGS) -o main main.cpp kosaraju_deque.o kosaraju_list.o kosaraju_matrix.o kosaraju_vector_list.o
 
 clean:

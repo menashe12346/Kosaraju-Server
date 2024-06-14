@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#include <vector>
+#include <utility>
 #include "kosaraju_deque.hpp"
 #include "kosaraju_list.hpp"
 #include "kosaraju_matrix.hpp"
@@ -39,7 +41,7 @@ void run_kosaraju_vector_list(int n, const vector<pair<int, int>>& edges) {
 
 int main() {
     cout << "Reading number of vertices and edges..." << endl;
-    
+
     // Read the number of vertices and edges
     int n, m;
     cin >> n >> m;
