@@ -1,5 +1,5 @@
-#ifndef KOSARAJU_LIST_H
-#define KOSARAJU_LIST_H
+#ifndef KOSARAJU_VECTOR_LIST_H
+#define KOSARAJU_VECTOR_LIST_H
 
 #include <iostream>
 #include <list>

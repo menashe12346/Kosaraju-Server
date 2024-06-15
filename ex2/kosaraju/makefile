@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2
+CXXFLAGS = -std=c++17 -O2 -pg # for gprof
 
 all: kosaraju_deque kosaraju_list kosaraju_matrix kosaraju_vector_list main
 

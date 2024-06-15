@@ -32,7 +32,7 @@ void KosarajuMatrix::findSCCs() {
 }
 
 void KosarajuMatrix::printSCCs() const {
-    cout << "Strongly Connected Components (SCCs):" << endl;
+    cout << "\nKosaraju Matrix algorithm: Strongly Connected Components (SCCs):" << endl;
     int sccCount = 1;
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";

@@ -1,49 +1,51 @@
-#include "kosaraju_vector_list.hpp"
+#include "kosaraju_deque.hpp"
 
-KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edges) : n(n) {
+KosarajuDeque::KosarajuDeque(int n, const vector<pair<int, int>>& edges) : n(n) {
     graph.resize(n);
     transposedGraph.resize(n);
     visited.resize(n, false);
     for (const auto& edge : edges) {
-        graph[edge.first - 1].push_back(edge.second - 1);
-        transposedGraph[edge.second - 1].push_back(edge.first - 1);
+        if (edge.first > 0 && edge.first <= n && edge.second > 0 && edge.second <= n) {
+            graph[edge.first - 1].push_back(edge.second - 1);  // Convert to zero-based index
+            transposedGraph[edge.second - 1].push_back(edge.first - 1);  // Convert to zero-based index
+        } else {
+            cerr << "Invalid edge: (" << edge.first << ", " << edge.second << ")" << endl;
+        }
     }
 }
 
-void KosarajuVectorList::findSCCs() {
-    // First Pass
+void KosarajuDeque::findSCCs() {
     for (int i = 0; i < n; ++i) {
         if (!visited[i]) {
             dfsFirstPass(i);
         }
     }
 
-    // Second Pass
     fill(visited.begin(), visited.end(), false);
     while (!finishStack.empty()) {
         int node = finishStack.top();
         finishStack.pop();
         if (!visited[node]) {
-            vector<int> scc;
+            deque<int> scc;
             dfsSecondPass(node, scc);
             sccs.push_back(scc);
         }
     }
 }
 
-void KosarajuVectorList::printSCCs() const {
-    cout << "Strongly Connected Components (SCCs):" << endl;
+void KosarajuDeque::printSCCs() const {
+    cout << "\nKosaraju Deque algorithm: Strongly Connected Components (SCCs):" << endl;
     int sccCount = 1;
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
         for (int node : scc) {
-            cout << node + 1 << " ";  // Convert back to 1-based index for output
+            cout << node << " ";
         }
         cout << endl << "----------------" << endl;
     }
 }
 
-void KosarajuVectorList::dfsFirstPass(int node) {
+void KosarajuDeque::dfsFirstPass(int node) {
     visited[node] = true;
     for (int neighbor : graph[node]) {
         if (!visited[neighbor]) {
@@ -53,7 +55,7 @@ void KosarajuVectorList::dfsFirstPass(int node) {
     finishStack.push(node);
 }
 
-void KosarajuVectorList::dfsSecondPass(int node, vector<int>& scc) {
+void KosarajuDeque::dfsSecondPass(int node, deque<int>& scc) {
     visited[node] = true;
     scc.push_back(node);
     for (int neighbor : transposedGraph[node]) {

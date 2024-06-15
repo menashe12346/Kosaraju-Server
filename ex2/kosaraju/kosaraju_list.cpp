@@ -38,7 +38,7 @@ void KosarajuList::findSCCs() {
 }
 
 void KosarajuList::printSCCs() const {
-    cout << "Strongly Connected Components (SCCs):" << endl;
+    cout << "\nKosaraju List algorithm: Strongly Connected Components (SCCs):" << endl;
     int sccCount = 1;
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
