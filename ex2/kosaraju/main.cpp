@@ -7,6 +7,7 @@
 #include "kosaraju_list.hpp"
 #include "kosaraju_matrix.hpp"
 #include "kosaraju_vector_list.hpp"
+#include "../../ex1/kosaraju_linked_list.hpp"
 
 using namespace std;
 using namespace std::chrono;
@@ -19,6 +20,12 @@ double profile_kosaraju(const std::string& name, Func func) {
     duration<double> duration = end - start;
     cout << "Time taken by " << name << ": " << duration.count() << " seconds\n";
     return duration.count();
+}
+
+void run_kosaraju_linked_list(int n, const vector<pair<int, int>>& edges) {
+    KosarajuLinkedList kosarajuLinkedList(n, edges);
+    kosarajuLinkedList.findSCCs();
+    kosarajuLinkedList.printSCCs();
 }
 
 void run_kosaraju_deque(int n, const vector<pair<int, int>>& edges) {
@@ -63,6 +70,7 @@ int main() {
     }
 
     map<string, double> timings;
+    timings["Kosaraju with Linked List"] = profile_kosaraju("Kosaraju with Linked List", [&]() { run_kosaraju_linked_list(n, edges); });
     timings["Kosaraju with Deque"] = profile_kosaraju("Kosaraju with Deque", [&]() { run_kosaraju_deque(n, edges); });
     timings["Kosaraju with List"] = profile_kosaraju("Kosaraju with List", [&]() { run_kosaraju_list(n, edges); });
     timings["Kosaraju with Matrix"] = profile_kosaraju("Kosaraju with Matrix", [&]() { run_kosaraju_matrix(n, edges); });
