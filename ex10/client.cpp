@@ -7,13 +7,18 @@ using namespace std;
 
 void sendCommand(int socket, const string& command) {
     write(socket, command.c_str(), command.size());
+    cout << "Sent command: " << command << endl; // Debugging print
 }
 
 void receiveResponse(int socket) {
     char buffer[1024];
-    bzero(buffer, 1024);
-    read(socket, buffer, 1023);
-    cout << buffer;
+    memset(buffer, 0, 1024);
+    int nbytes = read(socket, buffer, 1023);
+    if (nbytes > 0) {
+        cout << "Received response: " << buffer;
+    } else {
+        cerr << "Error on read or connection closed" << endl;
+    }
 }
 
 void printHelp() {

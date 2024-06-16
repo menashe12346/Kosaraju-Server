@@ -5,15 +5,16 @@ Each sample counts as 0.01 seconds.
 
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  Ts/call  Ts/call  name    
-  0.00      0.00     0.00       18     0.00     0.00  std::_Deque_base<int, std::allocator<int> >::~_Deque_base()
+  0.00      0.00     0.00       19     0.00     0.00  std::_Deque_base<int, std::allocator<int> >::~_Deque_base()
   0.00      0.00     0.00       15     0.00     0.00  std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long)
   0.00      0.00     0.00       12     0.00     0.00  KosarajuDeque::dfsFirstPass(int)
-  0.00      0.00     0.00       12     0.00     0.00  std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear()
-  0.00      0.00     0.00        8     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
-  0.00      0.00     0.00        8     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
+  0.00      0.00     0.00       10     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  0.00      0.00     0.00       10     0.00     0.00  std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear()
+  0.00      0.00     0.00       10     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
   0.00      0.00     0.00        5     0.00     0.00  std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.00      0.00     0.00        5     0.00     0.00  std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   0.00      0.00     0.00        4     0.00     0.00  void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&)
-  0.00      0.00     0.00        4     0.00     0.00  std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      0.00     0.00        4     0.00     0.00  std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool)
   0.00      0.00     0.00        4     0.00     0.00  frame_dummy
   0.00      0.00     0.00        3     0.00     0.00  std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base()
   0.00      0.00     0.00        3     0.00     0.00  std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque()
@@ -22,13 +23,17 @@ Each sample counts as 0.01 seconds.
   0.00      0.00     0.00        2     0.00     0.00  KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&)
   0.00      0.00     0.00        2     0.00     0.00  KosarajuMatrix::dfsFirstPass(int)
   0.00      0.00     0.00        2     0.00     0.00  KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&)
+  0.00      0.00     0.00        2     0.00     0.00  KosarajuLinkedList::dfsFirstPass(int)
+  0.00      0.00     0.00        2     0.00     0.00  KosarajuLinkedList::dfsSecondPass(int, LinkedList&)
   0.00      0.00     0.00        2     0.00     0.00  KosarajuVectorList::dfsFirstPass(int)
   0.00      0.00     0.00        2     0.00     0.00  KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&)
+  0.00      0.00     0.00        2     0.00     0.00  LinkedList::print() const
   0.00      0.00     0.00        2     0.00     0.00  std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long)
   0.00      0.00     0.00        2     0.00     0.00  std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&)
+  0.00      0.00     0.00        2     0.00     0.00  void std::vector<LinkedList, std::allocator<LinkedList> >::_M_realloc_insert<LinkedList const&>(__gnu_cxx::__normal_iterator<LinkedList*, std::vector<LinkedList, std::allocator<LinkedList> > >, LinkedList const&)
   0.00      0.00     0.00        2     0.00     0.00  std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
+  0.00      0.00     0.00        2     0.00     0.00  std::vector<Node*, std::allocator<Node*> >::_M_default_append(unsigned long)
   0.00      0.00     0.00        2     0.00     0.00  std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&)
-  0.00      0.00     0.00        2     0.00     0.00  std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool)
   0.00      0.00     0.00        2     0.00     0.00  std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
   0.00      0.00     0.00        2     0.00     0.00  std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long)
   0.00      0.00     0.00        2     0.00     0.00  __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>)
@@ -36,6 +41,7 @@ Each sample counts as 0.01 seconds.
   0.00      0.00     0.00        1     0.00     0.00  run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
+  0.00      0.00     0.00        1     0.00     0.00  run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  KosarajuList::findSCCs()
   0.00      0.00     0.00        1     0.00     0.00  KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
@@ -44,11 +50,14 @@ Each sample counts as 0.01 seconds.
   0.00      0.00     0.00        1     0.00     0.00  KosarajuMatrix::findSCCs()
   0.00      0.00     0.00        1     0.00     0.00  KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  KosarajuMatrix::~KosarajuMatrix()
+  0.00      0.00     0.00        1     0.00     0.00  KosarajuLinkedList::findSCCs()
+  0.00      0.00     0.00        1     0.00     0.00  KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  KosarajuVectorList::findSCCs()
   0.00      0.00     0.00        1     0.00     0.00  KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)
   0.00      0.00     0.00        1     0.00     0.00  KosarajuList::printSCCs() const
   0.00      0.00     0.00        1     0.00     0.00  KosarajuDeque::printSCCs() const
   0.00      0.00     0.00        1     0.00     0.00  KosarajuMatrix::printSCCs() const
+  0.00      0.00     0.00        1     0.00     0.00  KosarajuLinkedList::printSCCs() const
   0.00      0.00     0.00        1     0.00     0.00  KosarajuVectorList::printSCCs() const
   0.00      0.00     0.00        1     0.00     0.00  std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long)
   0.00      0.00     0.00        1     0.00     0.00  std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::~vector()
@@ -94,239 +103,280 @@ notice and this notice are preserved.
 granularity: each sample hit covers 4 byte(s) no time propagated
 
 index % time    self  children    called     name
-                                   4             frame_dummy [1]
+                                   5             frame_dummy [1]
                 0.00    0.00       4/4           main [6]
-[1]      0.0    0.00    0.00       4+4       frame_dummy [1]
-                                   4             frame_dummy [1]
+[1]      0.0    0.00    0.00       4+5       frame_dummy [1]
+                                   5             frame_dummy [1]
 -----------------------------------------------
-                0.00    0.00       1/18          run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [35]
-                0.00    0.00       1/18          run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-                0.00    0.00       1/18          run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [38]
-                0.00    0.00       1/18          KosarajuMatrix::~KosarajuMatrix() [45]
-                0.00    0.00       2/18          KosarajuDeque::findSCCs() [41]
-                0.00    0.00      12/18          std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [18]
-[8]      0.0    0.00    0.00      18         std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+                0.00    0.00       1/19          run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
+                0.00    0.00       1/19          run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+                0.00    0.00       1/19          run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [43]
+                0.00    0.00       1/19          run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
+                0.00    0.00       1/19          KosarajuMatrix::~KosarajuMatrix() [51]
+                0.00    0.00       2/19          KosarajuDeque::findSCCs() [47]
+                0.00    0.00      12/19          std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [19]
+[8]      0.0    0.00    0.00      19         std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                0.00    0.00       1/15          KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-                0.00    0.00       2/15          KosarajuDeque::findSCCs() [41]
-                0.00    0.00       2/15          std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [27]
-                0.00    0.00      10/15          std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [26]
+                0.00    0.00       1/15          KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+                0.00    0.00       2/15          KosarajuDeque::findSCCs() [47]
+                0.00    0.00       2/15          std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [31]
+                0.00    0.00      10/15          std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [30]
 [9]      0.0    0.00    0.00      15         std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [9]
 -----------------------------------------------
                                    3             KosarajuDeque::dfsFirstPass(int) [10]
-                0.00    0.00       2/12          KosarajuDeque::findSCCs() [41]
-                0.00    0.00      10/12          KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+                0.00    0.00       2/12          KosarajuDeque::findSCCs() [47]
+                0.00    0.00      10/12          KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
 [10]     0.0    0.00    0.00      12+3       KosarajuDeque::dfsFirstPass(int) [10]
                                    3             KosarajuDeque::dfsFirstPass(int) [10]
 -----------------------------------------------
-                0.00    0.00       2/12          std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [30]
-                0.00    0.00      10/12          std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [34]
-[11]     0.0    0.00    0.00      12         std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear() [11]
+                0.00    0.00       5/10          KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [24]
+                0.00    0.00       5/10          KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [28]
+[11]     0.0    0.00    0.00      10         void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [11]
 -----------------------------------------------
-                0.00    0.00       4/8           KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [23]
-                0.00    0.00       4/8           KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [25]
-[12]     0.0    0.00    0.00       8         void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [12]
+                0.00    0.00      10/10          std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [39]
+[12]     0.0    0.00    0.00      10         std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear() [12]
 -----------------------------------------------
-                0.00    0.00       8/8           main [6]
-[13]     0.0    0.00    0.00       8         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) [13]
+                0.00    0.00      10/10          main [6]
+[13]     0.0    0.00    0.00      10         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) [13]
 -----------------------------------------------
-                0.00    0.00       1/5           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-                0.00    0.00       4/5           main [6]
+                0.00    0.00       5/5           main [6]
 [14]     0.0    0.00    0.00       5         std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [14]
-                0.00    0.00       4/4           std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [16]
-                0.00    0.00       1/1           std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [55]
+                0.00    0.00       5/5           std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [15]
+                0.00    0.00       1/1           std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [64]
 -----------------------------------------------
-                0.00    0.00       2/4           KosarajuMatrix::findSCCs() [43]
-                0.00    0.00       2/4           KosarajuVectorList::findSCCs() [46]
-[15]     0.0    0.00    0.00       4         void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [15]
+                0.00    0.00       5/5           std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [14]
+[15]     0.0    0.00    0.00       5         std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [15]
 -----------------------------------------------
-                0.00    0.00       4/4           std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [14]
-[16]     0.0    0.00    0.00       4         std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [16]
+                0.00    0.00       2/4           KosarajuMatrix::findSCCs() [49]
+                0.00    0.00       2/4           KosarajuVectorList::findSCCs() [54]
+[16]     0.0    0.00    0.00       4         void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [16]
 -----------------------------------------------
-                0.00    0.00       3/3           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-[17]     0.0    0.00    0.00       3         std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [17]
+                0.00    0.00       1/4           KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [53]
+                0.00    0.00       1/4           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+                0.00    0.00       1/4           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [50]
+                0.00    0.00       1/4           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [55]
+[17]     0.0    0.00    0.00       4         std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [17]
 -----------------------------------------------
-                0.00    0.00       3/3           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-[18]     0.0    0.00    0.00       3         std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [18]
-                0.00    0.00      12/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+                0.00    0.00       3/3           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+[18]     0.0    0.00    0.00       3         std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [18]
 -----------------------------------------------
-                                   3             KosarajuList::dfsFirstPass(int) [19]
-                0.00    0.00       2/2           KosarajuList::findSCCs() [39]
-[19]     0.0    0.00    0.00       2+3       KosarajuList::dfsFirstPass(int) [19]
-                                   3             KosarajuList::dfsFirstPass(int) [19]
+                0.00    0.00       3/3           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+[19]     0.0    0.00    0.00       3         std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [19]
+                0.00    0.00      12/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                                   3             KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [20]
-                0.00    0.00       2/2           KosarajuList::findSCCs() [39]
-[20]     0.0    0.00    0.00       2+3       KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [20]
-                                   3             KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [20]
+                                   3             KosarajuList::dfsFirstPass(int) [20]
+                0.00    0.00       2/2           KosarajuList::findSCCs() [45]
+[20]     0.0    0.00    0.00       2+3       KosarajuList::dfsFirstPass(int) [20]
+                                   3             KosarajuList::dfsFirstPass(int) [20]
 -----------------------------------------------
-                                   3             KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [21]
-                0.00    0.00       2/2           KosarajuDeque::findSCCs() [41]
-[21]     0.0    0.00    0.00       2+3       KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [21]
-                                   3             KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [21]
+                                   3             KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [21]
+                0.00    0.00       2/2           KosarajuList::findSCCs() [45]
+[21]     0.0    0.00    0.00       2+3       KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [21]
+                                   3             KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [21]
 -----------------------------------------------
-                                   3             KosarajuMatrix::dfsFirstPass(int) [22]
-                0.00    0.00       2/2           KosarajuMatrix::findSCCs() [43]
-[22]     0.0    0.00    0.00       2+3       KosarajuMatrix::dfsFirstPass(int) [22]
-                                   3             KosarajuMatrix::dfsFirstPass(int) [22]
+                                   3             KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [22]
+                0.00    0.00       2/2           KosarajuDeque::findSCCs() [47]
+[22]     0.0    0.00    0.00       2+3       KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [22]
+                                   3             KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [22]
 -----------------------------------------------
-                                   3             KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [23]
-                0.00    0.00       2/2           KosarajuMatrix::findSCCs() [43]
-[23]     0.0    0.00    0.00       2+3       KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [23]
-                0.00    0.00       4/8           void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [12]
-                                   3             KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [23]
+                                   3             KosarajuMatrix::dfsFirstPass(int) [23]
+                0.00    0.00       2/2           KosarajuMatrix::findSCCs() [49]
+[23]     0.0    0.00    0.00       2+3       KosarajuMatrix::dfsFirstPass(int) [23]
+                                   3             KosarajuMatrix::dfsFirstPass(int) [23]
 -----------------------------------------------
-                                   3             KosarajuVectorList::dfsFirstPass(int) [24]
-                0.00    0.00       2/2           KosarajuVectorList::findSCCs() [46]
-[24]     0.0    0.00    0.00       2+3       KosarajuVectorList::dfsFirstPass(int) [24]
-                                   3             KosarajuVectorList::dfsFirstPass(int) [24]
+                                   3             KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [24]
+                0.00    0.00       2/2           KosarajuMatrix::findSCCs() [49]
+[24]     0.0    0.00    0.00       2+3       KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [24]
+                0.00    0.00       5/10          void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [11]
+                                   3             KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [24]
 -----------------------------------------------
-                                   3             KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [25]
-                0.00    0.00       2/2           KosarajuVectorList::findSCCs() [46]
-[25]     0.0    0.00    0.00       2+3       KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [25]
-                0.00    0.00       4/8           void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [12]
-                                   3             KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [25]
+                                   3             KosarajuLinkedList::dfsFirstPass(int) [25]
+                0.00    0.00       2/2           KosarajuLinkedList::findSCCs() [52]
+[25]     0.0    0.00    0.00       2+3       KosarajuLinkedList::dfsFirstPass(int) [25]
+                                   3             KosarajuLinkedList::dfsFirstPass(int) [25]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-[26]     0.0    0.00    0.00       2         std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [26]
+                                   3             KosarajuLinkedList::dfsSecondPass(int, LinkedList&) [26]
+                0.00    0.00       2/2           KosarajuLinkedList::findSCCs() [52]
+[26]     0.0    0.00    0.00       2+3       KosarajuLinkedList::dfsSecondPass(int, LinkedList&) [26]
+                                   3             KosarajuLinkedList::dfsSecondPass(int, LinkedList&) [26]
+-----------------------------------------------
+                                   3             KosarajuVectorList::dfsFirstPass(int) [27]
+                0.00    0.00       2/2           KosarajuVectorList::findSCCs() [54]
+[27]     0.0    0.00    0.00       2+3       KosarajuVectorList::dfsFirstPass(int) [27]
+                                   3             KosarajuVectorList::dfsFirstPass(int) [27]
+-----------------------------------------------
+                                   3             KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [28]
+                0.00    0.00       2/2           KosarajuVectorList::findSCCs() [54]
+[28]     0.0    0.00    0.00       2+3       KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [28]
+                0.00    0.00       5/10          void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [11]
+                                   3             KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [28]
+-----------------------------------------------
+                0.00    0.00       2/2           KosarajuLinkedList::printSCCs() const [59]
+[29]     0.0    0.00    0.00       2         LinkedList::print() const [29]
+-----------------------------------------------
+                0.00    0.00       2/2           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+[30]     0.0    0.00    0.00       2         std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [30]
                 0.00    0.00      10/15          std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [9]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuDeque::findSCCs() [41]
-[27]     0.0    0.00    0.00       2         std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [27]
+                0.00    0.00       2/2           KosarajuDeque::findSCCs() [47]
+[31]     0.0    0.00    0.00       2         std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [31]
                 0.00    0.00       2/15          std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [9]
-                0.00    0.00       2/2           __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>) [33]
+                0.00    0.00       2/2           __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>) [38]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [47]
-[28]     0.0    0.00    0.00       2         std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [28]
+                0.00    0.00       2/2           KosarajuLinkedList::findSCCs() [52]
+[32]     0.0    0.00    0.00       2         void std::vector<LinkedList, std::allocator<LinkedList> >::_M_realloc_insert<LinkedList const&>(__gnu_cxx::__normal_iterator<LinkedList*, std::vector<LinkedList, std::allocator<LinkedList> > >, LinkedList const&) [32]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
-[29]     0.0    0.00    0.00       2         std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [29]
-                0.00    0.00       2/2           std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [34]
+                0.00    0.00       2/2           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [55]
+[33]     0.0    0.00    0.00       2         std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [33]
 -----------------------------------------------
-                0.00    0.00       1/2           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
-                0.00    0.00       1/2           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [47]
-[30]     0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [30]
-                0.00    0.00       2/12          std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear() [11]
+                0.00    0.00       2/2           KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [53]
+[34]     0.0    0.00    0.00       2         std::vector<Node*, std::allocator<Node*> >::_M_default_append(unsigned long) [34]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
-[31]     0.0    0.00    0.00       2         std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [31]
+                0.00    0.00       2/2           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [50]
+[35]     0.0    0.00    0.00       2         std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [35]
+                0.00    0.00       2/2           std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [39]
 -----------------------------------------------
-                0.00    0.00       2/2           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
-[32]     0.0    0.00    0.00       2         std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long) [32]
+                0.00    0.00       2/2           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46]
+[36]     0.0    0.00    0.00       2         std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [36]
 -----------------------------------------------
-                0.00    0.00       2/2           std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [27]
-[33]     0.0    0.00    0.00       2         __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>) [33]
+                0.00    0.00       2/2           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46]
+[37]     0.0    0.00    0.00       2         std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long) [37]
 -----------------------------------------------
-                0.00    0.00       2/2           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [29]
-[34]     0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [34]
-                0.00    0.00      10/12          std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear() [11]
+                0.00    0.00       2/2           std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [31]
+[38]     0.0    0.00    0.00       2         __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>) [38]
 -----------------------------------------------
-                0.00    0.00       1/1           main [6]
-[35]     0.0    0.00    0.00       1         run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [35]
-                0.00    0.00       1/1           KosarajuList::findSCCs() [39]
-                0.00    0.00       1/1           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
-                0.00    0.00       1/1           KosarajuList::printSCCs() const [48]
-                0.00    0.00       1/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+                0.00    0.00       2/2           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [35]
+[39]     0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&) [39]
+                0.00    0.00      10/10          std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear() [12]
 -----------------------------------------------
                 0.00    0.00       1/1           main [6]
-[36]     0.0    0.00    0.00       1         run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-                0.00    0.00       3/3           std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [18]
-                0.00    0.00       1/1           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-                0.00    0.00       1/1           KosarajuDeque::printSCCs() const [49]
-                0.00    0.00       1/1           KosarajuDeque::findSCCs() [41]
-                0.00    0.00       1/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+[40]     0.0    0.00    0.00       1         run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
+                0.00    0.00       1/1           KosarajuList::findSCCs() [45]
+                0.00    0.00       1/1           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46]
+                0.00    0.00       1/1           KosarajuList::printSCCs() const [56]
+                0.00    0.00       1/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
                 0.00    0.00       1/1           main [6]
-[37]     0.0    0.00    0.00       1         run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [37]
-                0.00    0.00       1/1           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
-                0.00    0.00       1/1           KosarajuMatrix::printSCCs() const [50]
-                0.00    0.00       1/1           KosarajuMatrix::findSCCs() [43]
-                0.00    0.00       1/1           KosarajuMatrix::~KosarajuMatrix() [45]
+[41]     0.0    0.00    0.00       1         run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+                0.00    0.00       3/3           std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [19]
+                0.00    0.00       1/1           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+                0.00    0.00       1/1           KosarajuDeque::printSCCs() const [57]
+                0.00    0.00       1/1           KosarajuDeque::findSCCs() [47]
+                0.00    0.00       1/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
                 0.00    0.00       1/1           main [6]
-[38]     0.0    0.00    0.00       1         run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [38]
-                0.00    0.00       1/1           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [47]
-                0.00    0.00       1/1           KosarajuVectorList::printSCCs() const [51]
-                0.00    0.00       1/1           KosarajuVectorList::findSCCs() [46]
-                0.00    0.00       1/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+[42]     0.0    0.00    0.00       1         run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+                0.00    0.00       1/1           KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [50]
+                0.00    0.00       1/1           KosarajuMatrix::printSCCs() const [58]
+                0.00    0.00       1/1           KosarajuMatrix::findSCCs() [49]
+                0.00    0.00       1/1           KosarajuMatrix::~KosarajuMatrix() [51]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [35]
-[39]     0.0    0.00    0.00       1         KosarajuList::findSCCs() [39]
-                0.00    0.00       2/2           KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [20]
-                0.00    0.00       2/2           KosarajuList::dfsFirstPass(int) [19]
+                0.00    0.00       1/1           main [6]
+[43]     0.0    0.00    0.00       1         run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [43]
+                0.00    0.00       1/1           KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [53]
+                0.00    0.00       1/1           KosarajuLinkedList::printSCCs() const [59]
+                0.00    0.00       1/1           KosarajuLinkedList::findSCCs() [52]
+                0.00    0.00       1/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [35]
-[40]     0.0    0.00    0.00       1         KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
-                0.00    0.00       2/2           std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [31]
-                0.00    0.00       2/2           std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long) [32]
-                0.00    0.00       1/1           std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&) [54]
+                0.00    0.00       1/1           main [6]
+[44]     0.0    0.00    0.00       1         run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
+                0.00    0.00       1/1           KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [55]
+                0.00    0.00       1/1           KosarajuVectorList::printSCCs() const [60]
+                0.00    0.00       1/1           KosarajuVectorList::findSCCs() [54]
+                0.00    0.00       1/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-[41]     0.0    0.00    0.00       1         KosarajuDeque::findSCCs() [41]
+                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
+[45]     0.0    0.00    0.00       1         KosarajuList::findSCCs() [45]
+                0.00    0.00       2/2           KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [21]
+                0.00    0.00       2/2           KosarajuList::dfsFirstPass(int) [20]
+-----------------------------------------------
+                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
+[46]     0.0    0.00    0.00       1         KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46]
+                0.00    0.00       2/2           std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [36]
+                0.00    0.00       2/2           std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long) [37]
+                0.00    0.00       1/1           std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&) [63]
+-----------------------------------------------
+                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+[47]     0.0    0.00    0.00       1         KosarajuDeque::findSCCs() [47]
                 0.00    0.00       2/12          KosarajuDeque::dfsFirstPass(int) [10]
                 0.00    0.00       2/15          std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [9]
-                0.00    0.00       2/2           KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [21]
-                0.00    0.00       2/2           std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [27]
-                0.00    0.00       2/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+                0.00    0.00       2/2           KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [22]
+                0.00    0.00       2/2           std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&) [31]
+                0.00    0.00       2/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-[42]     0.0    0.00    0.00       1         KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+[48]     0.0    0.00    0.00       1         KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
                 0.00    0.00      10/12          KosarajuDeque::dfsFirstPass(int) [10]
-                0.00    0.00       3/3           std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [17]
-                0.00    0.00       2/2           std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [26]
+                0.00    0.00       3/3           std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [18]
+                0.00    0.00       2/2           std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [30]
                 0.00    0.00       1/15          std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [9]
-                0.00    0.00       1/5           std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [14]
-                0.00    0.00       1/1           std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long) [52]
+                0.00    0.00       1/4           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [17]
+                0.00    0.00       1/1           std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long) [61]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [37]
-[43]     0.0    0.00    0.00       1         KosarajuMatrix::findSCCs() [43]
-                0.00    0.00       2/2           KosarajuMatrix::dfsFirstPass(int) [22]
-                0.00    0.00       2/2           KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [23]
-                0.00    0.00       2/4           void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [15]
+                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+[49]     0.0    0.00    0.00       1         KosarajuMatrix::findSCCs() [49]
+                0.00    0.00       2/2           KosarajuMatrix::dfsFirstPass(int) [23]
+                0.00    0.00       2/2           KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [24]
+                0.00    0.00       2/4           void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [16]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [37]
-[44]     0.0    0.00    0.00       1         KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
-                0.00    0.00       2/2           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [29]
-                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [30]
+                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+[50]     0.0    0.00    0.00       1         KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [50]
+                0.00    0.00       2/2           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&) [35]
+                0.00    0.00       1/4           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [17]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [37]
-[45]     0.0    0.00    0.00       1         KosarajuMatrix::~KosarajuMatrix() [45]
-                0.00    0.00       1/18          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
+                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+[51]     0.0    0.00    0.00       1         KosarajuMatrix::~KosarajuMatrix() [51]
+                0.00    0.00       1/19          std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [8]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [38]
-[46]     0.0    0.00    0.00       1         KosarajuVectorList::findSCCs() [46]
-                0.00    0.00       2/2           KosarajuVectorList::dfsFirstPass(int) [24]
-                0.00    0.00       2/2           KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [25]
-                0.00    0.00       2/4           void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [15]
+                0.00    0.00       1/1           run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [43]
+[52]     0.0    0.00    0.00       1         KosarajuLinkedList::findSCCs() [52]
+                0.00    0.00       2/2           KosarajuLinkedList::dfsFirstPass(int) [25]
+                0.00    0.00       2/2           KosarajuLinkedList::dfsSecondPass(int, LinkedList&) [26]
+                0.00    0.00       2/2           void std::vector<LinkedList, std::allocator<LinkedList> >::_M_realloc_insert<LinkedList const&>(__gnu_cxx::__normal_iterator<LinkedList*, std::vector<LinkedList, std::allocator<LinkedList> > >, LinkedList const&) [32]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [38]
-[47]     0.0    0.00    0.00       1         KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [47]
-                0.00    0.00       2/2           std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [28]
-                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [30]
+                0.00    0.00       1/1           run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [43]
+[53]     0.0    0.00    0.00       1         KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [53]
+                0.00    0.00       2/2           std::vector<Node*, std::allocator<Node*> >::_M_default_append(unsigned long) [34]
+                0.00    0.00       1/4           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [17]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [35]
-[48]     0.0    0.00    0.00       1         KosarajuList::printSCCs() const [48]
+                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
+[54]     0.0    0.00    0.00       1         KosarajuVectorList::findSCCs() [54]
+                0.00    0.00       2/2           KosarajuVectorList::dfsFirstPass(int) [27]
+                0.00    0.00       2/2           KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [28]
+                0.00    0.00       2/4           void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&) [16]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [36]
-[49]     0.0    0.00    0.00       1         KosarajuDeque::printSCCs() const [49]
+                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
+[55]     0.0    0.00    0.00       1         KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [55]
+                0.00    0.00       2/2           std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long) [33]
+                0.00    0.00       1/4           std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool) [17]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [37]
-[50]     0.0    0.00    0.00       1         KosarajuMatrix::printSCCs() const [50]
+                0.00    0.00       1/1           run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
+[56]     0.0    0.00    0.00       1         KosarajuList::printSCCs() const [56]
 -----------------------------------------------
-                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [38]
-[51]     0.0    0.00    0.00       1         KosarajuVectorList::printSCCs() const [51]
+                0.00    0.00       1/1           run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [41]
+[57]     0.0    0.00    0.00       1         KosarajuDeque::printSCCs() const [57]
 -----------------------------------------------
-                0.00    0.00       1/1           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
-[52]     0.0    0.00    0.00       1         std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long) [52]
+                0.00    0.00       1/1           run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [42]
+[58]     0.0    0.00    0.00       1         KosarajuMatrix::printSCCs() const [58]
+-----------------------------------------------
+                0.00    0.00       1/1           run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [43]
+[59]     0.0    0.00    0.00       1         KosarajuLinkedList::printSCCs() const [59]
+                0.00    0.00       2/2           LinkedList::print() const [29]
+-----------------------------------------------
+                0.00    0.00       1/1           run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [44]
+[60]     0.0    0.00    0.00       1         KosarajuVectorList::printSCCs() const [60]
+-----------------------------------------------
+                0.00    0.00       1/1           KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [48]
+[61]     0.0    0.00    0.00       1         std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long) [61]
 -----------------------------------------------
                 0.00    0.00       1/1           main [6]
-[53]     0.0    0.00    0.00       1         std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::~vector() [53]
+[62]     0.0    0.00    0.00       1         std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::~vector() [62]
 -----------------------------------------------
-                0.00    0.00       1/1           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [40]
-[54]     0.0    0.00    0.00       1         std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&) [54]
+                0.00    0.00       1/1           KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46]
+[63]     0.0    0.00    0.00       1         std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&) [63]
 -----------------------------------------------
                 0.00    0.00       1/1           std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [14]
-[55]     0.0    0.00    0.00       1         std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [55]
+[64]     0.0    0.00    0.00       1         std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [64]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -419,20 +469,23 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [35] run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [24] KosarajuVectorList::dfsFirstPass(int) [29] std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&)
-  [36] run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [25] KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [15] void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&)
-  [37] run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [46] KosarajuVectorList::findSCCs() [53] std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::~vector()
-  [38] run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [47] KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [30] std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool)
-  [19] KosarajuList::dfsFirstPass(int) [48] KosarajuList::printSCCs() const [12] void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
-  [20] KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [49] KosarajuDeque::printSCCs() const [11] std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear()
-  [39] KosarajuList::findSCCs() [50] KosarajuMatrix::printSCCs() const [13] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
-  [40] KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [51] KosarajuVectorList::printSCCs() const [31] std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
-  [10] KosarajuDeque::dfsFirstPass(int) [17] std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [32] std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long)
-  [21] KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [9] std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [54] std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&)
-  [41] KosarajuDeque::findSCCs() [8] std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [55] std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-  [42] KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [14] std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [16] std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-  [22] KosarajuMatrix::dfsFirstPass(int) [26] std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [33] __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>)
-  [23] KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [18] std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [34] std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&)
-  [43] KosarajuMatrix::findSCCs() [52] std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long) [1] frame_dummy
-  [44] KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [27] std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&)
-  [45] KosarajuMatrix::~KosarajuMatrix() [28] std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
+  [40] run_kosaraju_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [52] KosarajuLinkedList::findSCCs() [32] void std::vector<LinkedList, std::allocator<LinkedList> >::_M_realloc_insert<LinkedList const&>(__gnu_cxx::__normal_iterator<LinkedList*, std::vector<LinkedList, std::allocator<LinkedList> > >, LinkedList const&)
+  [41] run_kosaraju_deque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [53] KosarajuLinkedList::KosarajuLinkedList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [33] std::vector<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
+  [42] run_kosaraju_matrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [27] KosarajuVectorList::dfsFirstPass(int) [34] std::vector<Node*, std::allocator<Node*> >::_M_default_append(unsigned long)
+  [43] run_kosaraju_linked_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [28] KosarajuVectorList::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [35] std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_fill_insert(__gnu_cxx::__normal_iterator<std::vector<bool, std::allocator<bool> >*, std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > > >, unsigned long, std::vector<bool, std::allocator<bool> > const&)
+  [44] run_kosaraju_vector_list(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [54] KosarajuVectorList::findSCCs() [16] void std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_M_realloc_insert<std::vector<int, std::allocator<int> > const&>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int> >*, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > >, std::vector<int, std::allocator<int> > const&)
+  [20] KosarajuList::dfsFirstPass(int) [55] KosarajuVectorList::KosarajuVectorList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [62] std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::~vector()
+  [21] KosarajuList::dfsSecondPass(int, std::__cxx11::list<int, std::allocator<int> >&) [29] LinkedList::print() const [17] std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool)
+  [45] KosarajuList::findSCCs() [56] KosarajuList::printSCCs() const [11] void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  [46] KosarajuList::KosarajuList(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [57] KosarajuDeque::printSCCs() const [12] std::__cxx11::_List_base<int, std::allocator<int> >::_M_clear()
+  [10] KosarajuDeque::dfsFirstPass(int) [58] KosarajuMatrix::printSCCs() const [13] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
+  [22] KosarajuDeque::dfsSecondPass(int, std::deque<int, std::allocator<int> >&) [59] KosarajuLinkedList::printSCCs() const [36] std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::_M_default_append(unsigned long)
+  [47] KosarajuDeque::findSCCs() [60] KosarajuVectorList::printSCCs() const [37] std::__cxx11::list<std::__cxx11::list<int, std::allocator<int> >, std::allocator<std::__cxx11::list<int, std::allocator<int> > > >::resize(unsigned long)
+  [48] KosarajuDeque::KosarajuDeque(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [18] std::_Deque_base<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_Deque_base() [63] std::__cxx11::list<bool, std::allocator<bool> >::resize(unsigned long, bool const&)
+  [23] KosarajuMatrix::dfsFirstPass(int) [9] std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long) [64] std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [24] KosarajuMatrix::dfsSecondPass(int, std::vector<int, std::allocator<int> >&) [8] std::_Deque_base<int, std::allocator<int> >::~_Deque_base() [15] std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [49] KosarajuMatrix::findSCCs() [14] std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, double> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [38] __gnu_cxx::__enable_if<std::__is_random_access_iter<int*, std::iterator_traits<int*>::iterator_category>::__value, std::_Deque_iterator<int, int&, int*> >::__type std::__copy_move_a1<false, int*, int>(int*, int*, std::_Deque_iterator<int, int&, int*>)
+  [50] KosarajuMatrix::KosarajuMatrix(int, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&) [30] std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::_M_default_append(unsigned long) [39] std::vector<bool, std::allocator<bool> >* std::__do_uninit_fill_n<std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > >(std::vector<bool, std::allocator<bool> >*, unsigned long, std::vector<bool, std::allocator<bool> > const&)
+  [51] KosarajuMatrix::~KosarajuMatrix() [19] std::deque<std::deque<int, std::allocator<int> >, std::allocator<std::deque<int, std::allocator<int> > > >::~deque() [1] frame_dummy
+  [25] KosarajuLinkedList::dfsFirstPass(int) [61] std::deque<bool, std::allocator<bool> >::_M_new_elements_at_front(unsigned long)
+  [26] KosarajuLinkedList::dfsSecondPass(int, LinkedList&) [31] std::deque<int, std::allocator<int> >::deque(std::deque<int, std::allocator<int> > const&)

@@ -22,4 +22,4 @@ main: main.cpp kosaraju_linked_list.o kosaraju_deque.o kosaraju_list.o kosaraju_
 	$(CXX) $(CXXFLAGS) -o main main.cpp kosaraju_linked_list.o kosaraju_deque.o kosaraju_list.o kosaraju_matrix.o kosaraju_vector_list.o
 
 clean:
-	rm -f *.o main analysis.txt
+	rm -f *.o main analysis.txt gmon.out

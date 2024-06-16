@@ -10,46 +10,66 @@
 #include "../../ex1/kosaraju_linked_list.hpp"
 
 using namespace std;
-using namespace std::chrono;
+using namespace std::chrono; // for the time analysis
 
-template <typename Func>
+/// @brief Profiles the execution time of a given function.
+/// @tparam Func A callable type (e.g., function, lambda)
+/// @param name The name of the function being profiled
+/// @param func The callable object to be profiled
+/// @return The duration in seconds as a double
+template <typename Func> // Allows writing generic functions that work with any type. The type is deduced by the compiler when the function is instantiated.
 double profile_kosaraju(const std::string& name, Func func) {
-    auto start = high_resolution_clock::now();
-    func();
-    auto end = high_resolution_clock::now();
-    duration<double> duration = end - start;
+    auto start = high_resolution_clock::now();  // Start timing
+    func();  // Run the provided function
+    auto end = high_resolution_clock::now();  // End timing
+    duration<double> duration = end - start;  // Calculate the duration
     cout << "Time taken by " << name << ": " << duration.count() << " seconds\n";
-    return duration.count();
+    return duration.count();  // Return the duration
 }
 
+/// @brief Runs Kosaraju's algorithm using a linked list representation of the graph
+/// @param n The number of nodes in the graph
+/// @param edges The edges of the graph
 void run_kosaraju_linked_list(int n, const vector<pair<int, int>>& edges) {
-    KosarajuLinkedList kosarajuLinkedList(n, edges);
-    kosarajuLinkedList.findSCCs();
-    kosarajuLinkedList.printSCCs();
+    KosarajuLinkedList kosarajuLinkedList(n, edges);  // Initialize the KosarajuLinkedList
+    kosarajuLinkedList.findSCCs();  // Find SCCs
+    kosarajuLinkedList.printSCCs();  // Print SCCs
 }
 
+/// @brief Runs Kosaraju's algorithm using a deque representation of the graph
+/// @param n The number of nodes in the graph
+/// @param edges The edges of the graph
 void run_kosaraju_deque(int n, const vector<pair<int, int>>& edges) {
-    KosarajuDeque kosarajuDeque(n, edges);
-    kosarajuDeque.findSCCs();
-    kosarajuDeque.printSCCs();
+    KosarajuDeque kosarajuDeque(n, edges);  // Initialize the KosarajuDeque
+    kosarajuDeque.findSCCs();  // Find SCCs
+    kosarajuDeque.printSCCs();  // Print SCCs
 }
 
+/// @brief Runs Kosaraju's algorithm using a list representation of the graph
+/// @param n The number of nodes in the graph
+/// @param edges The edges of the graph
 void run_kosaraju_list(int n, const vector<pair<int, int>>& edges) {
-    KosarajuList kosarajuList(n, edges);
-    kosarajuList.findSCCs();
-    kosarajuList.printSCCs();
+    KosarajuList kosarajuList(n, edges);  // Initialize the KosarajuList
+    kosarajuList.findSCCs();  // Find SCCs
+    kosarajuList.printSCCs();  // Print SCCs
 }
 
+/// @brief Runs Kosaraju's algorithm using a matrix representation of the graph
+/// @param n The number of nodes in the graph
+/// @param edges The edges of the graph
 void run_kosaraju_matrix(int n, const vector<pair<int, int>>& edges) {
-    KosarajuMatrix kosarajuMatrix(n, edges);
-    kosarajuMatrix.findSCCs();
-    kosarajuMatrix.printSCCs();
+    KosarajuMatrix kosarajuMatrix(n, edges);  // Initialize the KosarajuMatrix
+    kosarajuMatrix.findSCCs();  // Find SCCs
+    kosarajuMatrix.printSCCs();  // Print SCCs
 }
 
+/// @brief Runs Kosaraju's algorithm using a vector of lists representation of the graph
+/// @param n The number of nodes in the graph
+/// @param edges The edges of the graph
 void run_kosaraju_vector_list(int n, const vector<pair<int, int>>& edges) {
-    KosarajuVectorList kosarajuVectorList(n, edges);
-    kosarajuVectorList.findSCCs();
-    kosarajuVectorList.printSCCs();
+    KosarajuVectorList kosarajuVectorList(n, edges);  // Initialize the KosarajuVectorList
+    kosarajuVectorList.findSCCs();  // Find SCCs
+    kosarajuVectorList.printSCCs();  // Print SCCs
 }
 
 int main() {
@@ -69,7 +89,8 @@ int main() {
         cout << "Edge " << i << ": " << edges[i].first << " -> " << edges[i].second << endl;
     }
 
-    map<string, double> timings;
+    map<string, double> timings;  // Map to store timings of each implementation
+    // [&] - used to capture all variables from the surrounding scope by reference.
     timings["Kosaraju with Linked List"] = profile_kosaraju("Kosaraju with Linked List", [&]() { run_kosaraju_linked_list(n, edges); });
     timings["Kosaraju with Deque"] = profile_kosaraju("Kosaraju with Deque", [&]() { run_kosaraju_deque(n, edges); });
     timings["Kosaraju with List"] = profile_kosaraju("Kosaraju with List", [&]() { run_kosaraju_list(n, edges); });
@@ -77,11 +98,18 @@ int main() {
     timings["Kosaraju with Vector List"] = profile_kosaraju("Kosaraju with Vector List", [&]() { run_kosaraju_vector_list(n, edges); });
 
     // Determine the fastest algorithm
-    auto fastest = min_element(timings.begin(), timings.end(), [](const auto& lhs, const auto& rhs) {
-        return lhs.second < rhs.second;
+    auto fastest = min_element(timings.begin(), timings.end(), [](const auto& left, const auto& right) {
+        return left.second < right.second;
     });
 
     cout << "\nThe fastest algorithm is " << fastest->first << " with a time of " << fastest->second << " seconds.\n";
 
     return 0;
 }
+
+/* 
+USING GPROF:
+1) Compile with pg: g++ -pg -o main your_code.cpp
+2) Run the program: ./main
+3) Analyze the profile data: gprof main gmon.out > analysis.txt
+*/

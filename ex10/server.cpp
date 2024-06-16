@@ -30,26 +30,25 @@ bool isServerRunning = true;
 
 void processCommand(int clientSocket, const string& command);
 
-void* handleClient(void* arg) {
-    int clientSocket = *(int*)arg;
-    delete (int*)arg;
-
+void* handleClient(int sockfd) {
+    cout << "Client handler started for socket " << sockfd << endl;
     char buffer[1024];
     memset(buffer, 0, 1024);
     int nbytes;
-    while ((nbytes = read(clientSocket, buffer, 1023)) > 0) {
+    while ((nbytes = read(sockfd, buffer, 1023)) > 0) {
+        cout << "Received from client: " << buffer << endl;
         unique_lock<mutex> lock(queueMutex);
-        commandQueue.push(make_pair(clientSocket, string(buffer)));
+        commandQueue.push(make_pair(sockfd, string(buffer)));
         pthread_cond_signal(&queueConditionVar);
     }
     
     if (nbytes == 0) {
-        cout << "Socket " << clientSocket << " hung up" << endl;
+        cout << "Socket " << sockfd << " hung up" << endl;
     } else {
         cerr << "Error on read" << endl;
     }
 
-    close(clientSocket);
+    close(sockfd);
     return nullptr;
 }
 
@@ -58,13 +57,13 @@ void checkGraphSCC() {
     if (graph) {
         graph->findSCCs();
         vector<vector<int>> sccs = graph->getSCCs();
-        int maxSCCSize = 0;
+        size_t maxSCCSize = 0;
         for (const auto& scc : sccs) {
             if (scc.size() > maxSCCSize) {
                 maxSCCSize = scc.size();
             }
         }
-        bool newSccConditionMet = maxSCCSize >= graph->getNumVertices() / 2;
+        bool newSccConditionMet = maxSCCSize >= static_cast<size_t>(graph->getNumVertices()) / 2;
         if (newSccConditionMet != sccConditionMet) {
             sccConditionMet = newSccConditionMet;
             if (sccConditionMet) {
@@ -81,41 +80,46 @@ void checkGraphSCC() {
 }
 
 void processCommand(int clientSocket, const string& command) {
+    cout << "Processing command: " << command << endl;
     string response;
+    static int edgesToReceive = 0;
+    static vector<pair<int, int>> edges;
+
     if (command.find("NewGraph") == 0) {
         int n, m;
         sscanf(command.c_str(), "NewGraph %d %d", &n, &m);
-        vector<pair<int, int>> edges(m);
+        edgesToReceive = m;
+        edges.clear();
+        edges.resize(m);
         response = "Creating new graph...\n";
         response += "Number of vertices: " + to_string(n) + ", Number of edges: " + to_string(m) + "\n";
         response += "Please provide the edges one by one:\n";
         write(clientSocket, response.c_str(), response.size());
-        
-        for (int i = 0; i < m; ++i) {
-            char buffer[1024];
-            memset(buffer, 0, 1024);
-            read(clientSocket, buffer, 1023);
-            sscanf(buffer, "%d %d", &edges[i].first, &edges[i].second);
-            response = "Edge " + to_string(i + 1) + ": " + to_string(edges[i].first) + " -> " + to_string(edges[i].second) + "\n";
+    } else if (edgesToReceive > 0) {
+        int u, v;
+        sscanf(command.c_str(), "%d %d", &u, &v);
+        edges[edges.size() - edgesToReceive] = {u, v};
+        response = "Edge " + to_string(edges.size() - edgesToReceive + 1) + ": " + to_string(u) + " -> " + to_string(v) + "\n";
+        write(clientSocket, response.c_str(), response.size());
+        edgesToReceive--;
+        if (edgesToReceive == 0) {
+            graphMutex.lock();
+            delete graph;
+            graph = new KosarajuVectorList(edges.size(), edges);
+            graphMutex.unlock();
+            response = "Graph created successfully with " + to_string(edges.size()) + " vertices and " + to_string(edges.size()) + " edges\n";
             write(clientSocket, response.c_str(), response.size());
+
+            stringstream ss;
+            streambuf* coutbuf = cout.rdbuf();
+            cout.rdbuf(ss.rdbuf());
+            graph->printGraph();
+            cout.rdbuf(coutbuf);
+            response = ss.str();
+            write(clientSocket, response.c_str(), response.size());
+
+            cout << "Graph created with " << edges.size() << " vertices and " << edges.size() << " edges" << endl;
         }
-        
-        graphMutex.lock();
-        delete graph;
-        graph = new KosarajuVectorList(n, edges);
-        graphMutex.unlock();
-        response = "Graph created successfully with " + to_string(n) + " vertices and " + to_string(m) + " edges\n";
-        write(clientSocket, response.c_str(), response.size());
-
-        stringstream ss;
-        streambuf* coutbuf = cout.rdbuf();
-        cout.rdbuf(ss.rdbuf());
-        graph->printGraph();
-        cout.rdbuf(coutbuf);
-        response = ss.str();
-        write(clientSocket, response.c_str(), response.size());
-
-        cout << "Graph created with " << n << " vertices and " << m << " edges" << endl;
     } else if (command.find("Kosaraju") == 0) {
         graphMutex.lock();
         if (graph) {
@@ -183,11 +187,11 @@ void processCommand(int clientSocket, const string& command) {
     }
 }
 
-void* consumerThread(void* arg) {
+void* consumerThread(void*) {
     while (isServerRunning) {
         unique_lock<mutex> lock(queueMutex);
         while (commandQueue.empty() && isServerRunning) {
-            pthread_cond_wait(&queueConditionVar, &queueMutex.native_handle());
+            pthread_cond_wait(&queueConditionVar, queueMutex.native_handle());
         }
 
         if (!isServerRunning) {
@@ -243,7 +247,6 @@ int main() {
             cerr << "Error on accept" << endl;
         } else {
             cout << "New connection on socket " << clientSocket << endl;
-            int* pclient = new int(clientSocket);
             pthread_t tid = startProactor(clientSocket, handleClient);
             pthread_detach(tid); // Detach the thread so that it cleans up after itself
         }
