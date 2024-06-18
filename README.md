@@ -43,7 +43,7 @@ To set up and run these exercises, follow the instructions below:
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd operating_systems_ex3-main
+   cd operating_systems_ex3
    ```
 
 2. **Compile the code:**
@@ -51,11 +51,3 @@ To set up and run these exercises, follow the instructions below:
 
 3. **Run the server:**
    Refer to the specific instructions provided in each stage's directory to start the server and interact with it.
-
-## 🤝 Contributing
-
-If you would like to contribute to this project, please create a fork and submit a pull request with your changes. Ensure that your code adheres to the coding standards used in this project.
-
-## 📜 License
-
-This project is licensed under the MIT License.
