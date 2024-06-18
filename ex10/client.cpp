@@ -1,26 +1,34 @@
 #include <iostream>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <cstring>
+#include <netinet/in.h> // for sockaddr_in structure
+#include <unistd.h> // for bzero, close
+#include <cstring> // for bzero
+#include <arpa/inet.h> // for inet_addr
 
 using namespace std;
 
+/// @brief Sends a command to the server.
+/// @param socket The socket of the server.
+/// @param command The command to send to the server.
 void sendCommand(int socket, const string& command) {
-    write(socket, command.c_str(), command.size());
-    cout << "Sent command: " << command << endl; // Debugging print
-}
-
-void receiveResponse(int socket) {
-    char buffer[1024];
-    memset(buffer, 0, 1024);
-    int nbytes = read(socket, buffer, 1023);
-    if (nbytes > 0) {
-        cout << "Received response: " << buffer;
-    } else {
-        cerr << "Error on read or connection closed" << endl;
+    // Writes the command to the specified socket. The command is converted to a C-style string using c_str().
+    if (write(socket, command.c_str(), command.size()) < 0) {
+        cerr << "Error writing to socket" << endl;
     }
 }
 
+/// @brief Receives a response from the server and prints it to the console.
+/// @param socket The socket of the server.
+void receiveResponse(int socket) {
+    char buffer[1024];
+    bzero(buffer, 1024); // Clears the buffer.
+    if (read(socket, buffer, 1023) < 0) { // Reads from the socket into the buffer.
+        cerr << "Error reading from socket" << endl;
+    } else {
+        cout << buffer;
+    }
+}
+
+/// @brief Prints a help message with available commands and their descriptions.
 void printHelp() {
     cout << "\nAvailable commands:\n"
          << "NewGraph n m\n"
@@ -54,19 +62,41 @@ void printHelp() {
 }
 
 int main() {
-    int sockfd, portno = 9034;
+    int sockfd, portno = 9034; // the port of beej
     struct sockaddr_in serv_addr;
-    
+
+    /* High-level overview of struct sockaddr_in:
+
+    struct sockaddr_in {
+        short            sin_family;   // address family, e.g., AF_INET
+        unsigned short   sin_port;     // port number for the socket
+        struct in_addr   sin_addr;     // structure to hold the IPv4 address (binary representation of the IP address for the socket)
+        char             sin_zero[8];  // padding to make the structure the same size as struct sockaddr
+    };
+
+    struct in_addr {
+        unsigned long s_addr; // holds the IP address 
+    };
+    */
+
+    /*
+    AF_INET: Specifies the address family (IPv4). We chose IPv4 because it ensures compatibility with a vast majority of existing networks and devices.
+    SOCK_STREAM: Specifies the socket type (TCP).
+    0: Automatically chooses the appropriate protocol for the given socket type. For SOCK_STREAM with AF_INET, this will be TCP.
+    */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         cerr << "Error opening socket" << endl;
         return 1;
     }
     
+    // We chose AF_INET as the address family for the socket (specifying that the socket will use IPv4 addresses, a protocol for transmitting data over the internet).
+    // There are many protocols in AF_INET, among them the most popular are TCP and UDP. We will use TCP.
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-    serv_addr.sin_port = htons(portno);
+    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Use localhost for testing
+    serv_addr.sin_port = htons(portno); // Convert the representation of the port into big-endian (the expected network byte order).
     
+    // Attempts to connect to the server specified by serv_addr.
     if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
         cerr << "Error connecting" << endl;
         return 1;
@@ -75,7 +105,7 @@ int main() {
     while (true) {
         cout << "Enter command (NewGraph, NewEdge, RemoveEdge, Kosaraju, PrintGraph, help, exit): ";
         string command;
-        getline(cin, command);
+        getline(cin, command); // Reads the entire input line into the command string.
         
         if (command == "help") {
             printHelp();

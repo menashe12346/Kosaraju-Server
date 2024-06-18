@@ -5,27 +5,33 @@ KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edge
     transposedGraph.resize(n);
     visited.resize(n, false);
     for (const auto& edge : edges) {
-        graph[edge.first - 1].push_back(edge.second - 1);
-        transposedGraph[edge.second - 1].push_back(edge.first - 1);
+        graph[edge.first - 1].push_back(edge.second - 1); // Add edge to the graph
+        transposedGraph[edge.second - 1].push_back(edge.first - 1); // Add edge to the transposed graph
     }
 }
 
 void KosarajuVectorList::findSCCs() {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
+
     // First Pass
     for (int i = 0; i < n; ++i) {
         if (!visited[i]) {
-            dfsFirstPass(i);
+            dfsFirstPass(i); // Perform DFS to fill the finish stack
         }
     }
 
     // Second Pass
-    fill(visited.begin(), visited.end(), false);
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
     while (!finishStack.empty()) {
         int node = finishStack.top();
         finishStack.pop();
         if (!visited[node]) {
             vector<int> scc;
-            dfsSecondPass(node, scc);
+            dfsSecondPass(node, scc); // Perform DFS to find SCCs
             sccs.push_back(scc);
         }
     }
@@ -65,7 +71,7 @@ void KosarajuVectorList::printGraph() const {
                     break;
                 }
             }
-            cout << (hasEdge ? "1" : "0") << " ";
+            cout << (hasEdge ? "1" : "0") << " "; // Print 1 if there is an edge, otherwise 0
         }
         cout << "\n";
     }
@@ -74,37 +80,37 @@ void KosarajuVectorList::printGraph() const {
     cout << "\nEdges:\n";
     for (int i = 0; i < n; ++i) {
         for (int neighbor : graph[i]) {
-            cout << (i + 1) << " -> " << (neighbor + 1) << "\n";
+            cout << (i + 1) << " -> " << (neighbor + 1) << "\n"; // Print the edges
         }
     }
 }
 
 void KosarajuVectorList::dfsFirstPass(int node) {
-    visited[node] = true;
+    visited[node] = true; // Mark the node as visited
     for (int neighbor : graph[node]) {
         if (!visited[neighbor]) {
-            dfsFirstPass(neighbor);
+            dfsFirstPass(neighbor); // Recursively visit all neighbors
         }
     }
-    finishStack.push(node);
+    finishStack.push(node); // Push the node to the finish stack after all neighbors are visited
 }
 
 void KosarajuVectorList::dfsSecondPass(int node, vector<int>& scc) {
-    visited[node] = true;
-    scc.push_back(node);
+    visited[node] = true; // Mark the node as visited
+    scc.push_back(node); // Add the node to the current SCC
     for (int neighbor : transposedGraph[node]) {
         if (!visited[neighbor]) {
-            dfsSecondPass(neighbor, scc);
+            dfsSecondPass(neighbor, scc); // Recursively visit all neighbors
         }
     }
 }
 
 void KosarajuVectorList::addEdge(int u, int v) {
-    graph[u - 1].push_back(v - 1);
-    transposedGraph[v - 1].push_back(u - 1);
+    graph[u - 1].push_back(v - 1); // Add edge to the graph
+    transposedGraph[v - 1].push_back(u - 1); // Add edge to the transposed graph
 }
 
 void KosarajuVectorList::removeEdge(int u, int v) {
-    graph[u - 1].remove(v - 1);
-    transposedGraph[v - 1].remove(u - 1);
+    graph[u - 1].remove(v - 1); // Remove edge from the graph
+    transposedGraph[v - 1].remove(u - 1); // Remove edge from the transposed graph
 }
