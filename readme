@@ -1,15 +1,15 @@
-# Operating Systems Exercise 3: Synchronization and Kosaraju Server
+# 🖥️ Operating Systems Exercise 3: Synchronization and Kosaraju Server
 
-This repository contains the implementation of the Kosaraju-Sharir algorithm for finding strongly connected components (SCC) in a graph. The project includes several stages, each building on the previous one to integrate synchronization, server capabilities, and various design patterns.
+This repository contains the implementation of the **Kosaraju-Sharir algorithm** for finding strongly connected components (SCC) in a graph. The project includes several stages, each building on the previous one to integrate synchronization, server capabilities, and various design patterns.
 
-## Overview
+## 🌟 Overview
 
 The project aims to implement a server that can handle graph operations and compute SCCs using Kosaraju's algorithm. It is designed to handle multiple clients, ensuring synchronization and efficient processing using various design patterns such as reactor and proactor. Each stage enhances the functionality and robustness of the server.
 
-## Stages of Implementation
+## 🚀 Stages of Implementation
 
 ### Stage 1: Implementing Kosaraju's Algorithm
-The first stage involves implementing the Kosaraju-Sharir algorithm to find SCCs in a directed graph. The server reads the graph's vertices and edges, processes them, and outputs the SCCs. This forms the core functionality of the project.
+The first stage involves implementing the **Kosaraju-Sharir algorithm** to find SCCs in a directed graph. The server reads the graph's vertices and edges, processes them, and outputs the SCCs. This forms the core functionality of the project.
 
 ### Stage 2: Profiling Different Implementations
 In this stage, the project focuses on profiling different implementations of lists used in the algorithm. By comparing various list implementations, such as `std::list` and `std::deque` in C++, we determine the most efficient one for our use case.
@@ -35,14 +35,14 @@ The server combines the reactor and proactor patterns to optimize handling clien
 ### Stage 9: Producer-Consumer Thread Model
 Finally, a producer-consumer thread model is added to the server. An additional thread monitors the graph's state and prints a message when at least 50% of the vertices are in a single SCC. This stage ensures that the server can handle complex, real-time processing requirements.
 
-## Setup
+## ⚙️ Setup
 
 To set up and run these exercises, follow the instructions below:
 
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd operating_systems_ex3-main
+   cd operating_systems_ex3-main```
 
 2. **Compile the code:**
    Each stage may have its own compilation instructions. Generally, you can use `make` to compile the code in each stage's directory.
