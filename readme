@@ -1,4 +1,3 @@
-
 # Operating Systems Exercise 3: Synchronization and Kosaraju Server
 
 This repository contains the implementation of the Kosaraju-Sharir algorithm for finding strongly connected components (SCC) in a graph. The project includes several stages, each building on the previous one to integrate synchronization, server capabilities, and various design patterns.
@@ -43,8 +42,7 @@ To set up and run these exercises, follow the instructions below:
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd operating_systems_ex3
-   ```
+   cd operating_systems_ex3-main
 
 2. **Compile the code:**
    Each stage may have its own compilation instructions. Generally, you can use `make` to compile the code in each stage's directory.
