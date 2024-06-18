@@ -26,6 +26,7 @@ condition_variable graphCondVar;
 KosarajuVectorList* graph = nullptr;
 /// Flag to indicate if 50% SCC condition is met
 bool sccConditionMet = false;
+bool sccConditionWasMet = false;
 
 /// @brief Processes commands received from the client.
 /// @param clientSocket The socket of the client.
@@ -81,6 +82,7 @@ void processCommand(int clientSocket, const string& command) {
         delete graph; // Delete the existing graph
         graph = new KosarajuVectorList(n, edges); // Create a new graph with the provided edges
         sccConditionMet = false; // Reset the SCC condition flag
+        sccConditionWasMet = false; // Reset the previous SCC condition flag
         graphMutex.unlock(); // Unlock the graph mutex
         response = "Graph created successfully with " + to_string(n) + " vertices and " + to_string(m) + " edges\n";
         write(clientSocket, response.c_str(), response.size()); // Send confirmation to client
@@ -110,16 +112,11 @@ void processCommand(int clientSocket, const string& command) {
 
             // Check SCC condition
             int largestSCC = graph->largestSCCSize();
-            if (largestSCC >= graph->getNumVertices() / 2) {
-                if (!sccConditionMet) {
-                    sccConditionMet = true;
-                    graphCondVar.notify_all(); // Notify the monitoring thread
-                }
-            } else {
-                if (sccConditionMet) {
-                    sccConditionMet = false;
-                    graphCondVar.notify_all(); // Notify the monitoring thread
-                }
+            bool previousConditionMet = sccConditionMet;
+            sccConditionMet = largestSCC >= graph->getNumVertices() / 2;
+
+            if (sccConditionMet != previousConditionMet) {
+                graphCondVar.notify_all(); // Notify the monitoring thread
             }
         }
         graphMutex.unlock(); // Unlock the graph mutex
@@ -171,12 +168,13 @@ void processCommand(int clientSocket, const string& command) {
 void* monitorGraph(void*) {
     unique_lock<mutex> lock(graphMutex);
     while (true) {
-        graphCondVar.wait(lock, []{ return sccConditionMet; }); // Wait for the SCC condition to be met
+        graphCondVar.wait(lock, []{ return sccConditionMet != sccConditionWasMet; }); // Wait for SCC condition change
         if (sccConditionMet) {
             cout << "At Least 50% of the graph belongs to the same SCC\n";
         } else {
             cout << "At Least 50% of the graph no longer belongs to the same SCC\n";
         }
+        sccConditionWasMet = sccConditionMet; // Update the previous condition state
     }
     return nullptr;
 }

@@ -17,6 +17,8 @@ public:
     /// @param edges The edges of the graph
     KosarajuDeque(int n, const vector<pair<int, int>>& edges);
 
+    const std::deque<std::deque<int>>& getSCCs() const;
+
     /// @brief Finds and stores the strongly connected components (SCCs) of the graph
     void findSCCs();
 

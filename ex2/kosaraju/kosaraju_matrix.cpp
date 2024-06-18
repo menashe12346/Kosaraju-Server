@@ -1,18 +1,32 @@
 #include "kosaraju_matrix.hpp"
 
 KosarajuMatrix::KosarajuMatrix(int n, const vector<pair<int, int>>& edges) : n(n) {
-    graph.resize(n, vector<bool>(n, false));  // Initialize the graph matrix with false
-    transposedGraph.resize(n, vector<bool>(n, false));  // Initialize the transposed graph matrix with false
-    visited.resize(n, false);  // Initialize the visited vector with false
+    // Initialize the graph matrix with false
+    graph.resize(n + 1, vector<bool>(n + 1, false));
+    // Initialize the transposed graph matrix with false
+    transposedGraph.resize(n + 1, vector<bool>(n + 1, false));
+    // Initialize the visited vector with false
+    visited.resize(n + 1, false);
     for (const auto& edge : edges) {
-        graph[edge.first - 1][edge.second - 1] = true;  // Add edge to the graph (convert to zero-based index)
-        transposedGraph[edge.second - 1][edge.first - 1] = true;  // Add edge to the transposed graph (convert to zero-based index)
+        // Add edge to the graph (convert to one-based index)
+        graph[edge.first][edge.second] = true;
+        // Add edge to the transposed graph (convert to one-based index)
+        transposedGraph[edge.second][edge.first] = true;
     }
 }
 
+const std::vector<std::vector<int>>& KosarajuMatrix::getSCCs() const {
+    return sccs;
+}
+
 void KosarajuMatrix::findSCCs() {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
     // First Pass
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (!visited[i]) {
             dfsFirstPass(i);  // Perform DFS to fill the finish stack
         }
@@ -37,7 +51,7 @@ void KosarajuMatrix::printSCCs() const {
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
         for (int node : scc) {
-            cout << node + 1 << " ";  // Convert back to 1-based index for output
+            cout << node << " ";  // Output the node (already adjusted for 1-based index)
         }
         cout << endl << "----------------" << endl;
     }
@@ -45,7 +59,7 @@ void KosarajuMatrix::printSCCs() const {
 
 void KosarajuMatrix::dfsFirstPass(int node) {
     visited[node] = true;  // Mark the node as visited
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (graph[node][i] && !visited[i]) {
             dfsFirstPass(i);  // Recursively visit all unvisited adjacent nodes
         }
@@ -56,7 +70,7 @@ void KosarajuMatrix::dfsFirstPass(int node) {
 void KosarajuMatrix::dfsSecondPass(int node, vector<int>& scc) {
     visited[node] = true;  // Mark the node as visited
     scc.push_back(node);  // Add the node to the current SCC
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (transposedGraph[node][i] && !visited[i]) {
             dfsSecondPass(i, scc);  // Recursively visit all unvisited adjacent nodes
         }

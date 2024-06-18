@@ -44,12 +44,22 @@ KosarajuLinkedList::KosarajuLinkedList(int n, const vector<pair<int, int>>& edge
     }
 }
 
+const std::vector<LinkedList>& KosarajuLinkedList::getSCCs() const {
+    return sccs;
+}
+
 /* STEPS: 
         1) DFS(G)
         2) DFS(Transposed G) based on the results of (1)
         3) Print the SCCs
 */
 void KosarajuLinkedList::findSCCs() {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
+
     // **First Depth-First Search (DFS) Pass:**
     // - Iterate through all nodes.
     // - For each unvisited node, perform a DFS to explore all reachable nodes.
@@ -86,10 +96,24 @@ void KosarajuLinkedList::printSCCs() const {
     int sccCount = 1;
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
-        scc.print();  // Print each SCC
-        cout << "----------------" << endl;
+        
+        // To print the linked list from end to beginning, we need to collect elements first
+        vector<int> elements;
+        Node* current = scc.head;
+        while (current) {
+            elements.push_back(current->data);
+            current = current->next;
+        }
+        
+        // Print elements in reverse order
+        for (auto it = elements.rbegin(); it != elements.rend(); ++it) {
+            cout << *it << " ";
+        }
+        
+        cout << endl << "----------------" << endl;
     }
 }
+
 
 void KosarajuLinkedList::addEdge(Node*& head, int data) {
     Node* newNode = new Node(data);  // Create a new node with the given data

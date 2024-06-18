@@ -1,21 +1,30 @@
 #include "kosaraju_deque.hpp"
 
 KosarajuDeque::KosarajuDeque(int n, const vector<pair<int, int>>& edges) : n(n) {
-    graph.resize(n);  // Initialize the graph with n nodes
-    transposedGraph.resize(n);  // Initialize the transposed graph with n nodes
-    visited.resize(n, false);  // Initialize the visited vector with false
+    graph.resize(n + 1);  // Initialize the graph with n+1 nodes (1-based index)
+    transposedGraph.resize(n + 1);  // Initialize the transposed graph with n+1 nodes (1-based index)
+    visited.resize(n + 1, false);  // Initialize the visited vector with false
     for (const auto& edge : edges) {
         if (edge.first > 0 && edge.first <= n && edge.second > 0 && edge.second <= n) {
-            graph[edge.first - 1].push_back(edge.second - 1);  // Add edge to the graph (convert to zero-based index)
-            transposedGraph[edge.second - 1].push_back(edge.first - 1);  // Add edge to the transposed graph (convert to zero-based index)
+            graph[edge.first].push_back(edge.second);  // Add edge to the graph (1-based index)
+            transposedGraph[edge.second].push_back(edge.first);  // Add edge to the transposed graph (1-based index)
         } else {
             cerr << "Invalid edge: (" << edge.first << ", " << edge.second << ")" << endl;  // Print error for invalid edges
         }
     }
 }
 
+const std::deque<std::deque<int>>& KosarajuDeque::getSCCs() const {
+    return sccs;
+}
+
 void KosarajuDeque::findSCCs() {
-    for (int i = 0; i < n; ++i) {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
+    for (int i = 1; i <= n; ++i) {  // Start loop from 1 instead of 0
         if (!visited[i]) {
             dfsFirstPass(i);  // Perform DFS for the first pass
         }
@@ -39,7 +48,7 @@ void KosarajuDeque::printSCCs() const {
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
         for (int node : scc) {
-            cout << node << " ";  // Print each node in the SCC
+            cout << node << " ";  // Print each node in the SCC (1-based index)
         }
         cout << endl << "----------------" << endl;
     }

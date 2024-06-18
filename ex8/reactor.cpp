@@ -79,15 +79,17 @@ void* proactorWrapper(void* arg) {
 }
 
 pthread_t startProactor(int sockfd, proactorFunc threadFunc) {
-    pthread_t tid;
-    ProactorArg* proactorArg = new ProactorArg{sockfd, threadFunc};
-    if (pthread_create(&tid, nullptr, proactorWrapper, proactorArg) != 0) {
-        cerr << "Error creating proactor thread" << endl;
-        delete proactorArg; // Clean up on failure
-    }
-    return tid;
-}
+    pthread_t tid; // Variable to store the thread ID
 
-int stopProactor(pthread_t tid) {
-    return pthread_cancel(tid); // Cancel the proactor thread
+    // Allocate memory for the ProactorArg structure and initialize it
+    ProactorArg* proactorArg = new ProactorArg{sockfd, threadFunc};
+    
+    // Create a new thread to handle the client connection
+    if (pthread_create(&tid, nullptr, proactorWrapper, proactorArg) != 0) {
+        cerr << "Error creating proactor thread" << endl; // Log error if thread creation fails
+        delete proactorArg; // Clean up allocated memory on failure
+    }
+
+    // Return the thread ID of the newly created thread
+    return tid;
 }

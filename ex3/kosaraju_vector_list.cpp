@@ -1,12 +1,21 @@
 #include "kosaraju_vector_list.hpp"
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
 
 KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edges) : n(n) {
-    graph.resize(n);
-    transposedGraph.resize(n);
-    visited.resize(n, false);
+    // Initialize the graph with n+1 nodes to accommodate 1-based indexing
+    graph.resize(n + 1);
+    // Initialize the transposed graph with n+1 nodes to accommodate 1-based indexing
+    transposedGraph.resize(n + 1);
+    // Initialize the visited vector with n+1 nodes to accommodate 1-based indexing
+    visited.resize(n + 1, false);
     for (const auto& edge : edges) {
-        graph[edge.first - 1].push_back(edge.second - 1); // Add edge to the graph
-        transposedGraph[edge.second - 1].push_back(edge.first - 1); // Add edge to the transposed graph
+        // Add edge to the graph (convert to one-based index)
+        graph[edge.first].push_back(edge.second);
+        // Add edge to the transposed graph (convert to one-based index)
+        transposedGraph[edge.second].push_back(edge.first);
     }
 }
 
@@ -18,7 +27,7 @@ void KosarajuVectorList::findSCCs() {
     }
 
     // First Pass
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (!visited[i]) {
             dfsFirstPass(i); // Perform DFS to fill the finish stack
         }
@@ -43,45 +52,20 @@ void KosarajuVectorList::printSCCs() const {
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
         for (int node : scc) {
-            cout << node + 1 << " ";  // Convert back to 1-based index for output
+            cout << node << " ";  // Output the node (already adjusted for 1-based index)
         }
         cout << endl << "----------------" << endl;
     }
 }
 
 void KosarajuVectorList::printGraph() const {
-    cout << "\nCurrent Graph (Adjacency Matrix):\n";
-    cout << "    ";
-    for (int i = 0; i < n; ++i) {
-        cout << (i + 1) << " ";
-    }
-    cout << "\n   ";
-    for (int i = 0; i < n; ++i) {
-        cout << "---";
-    }
-    cout << "\n";
-
-    for (int i = 0; i < n; ++i) {
-        cout << (i + 1) << " | ";
-        for (int j = 0; j < n; ++j) {
-            bool hasEdge = false;
-            for (int neighbor : graph[i]) {
-                if (neighbor == j) {
-                    hasEdge = true;
-                    break;
-                }
-            }
-            cout << (hasEdge ? "1" : "0") << " "; // Print 1 if there is an edge, otherwise 0
-        }
-        cout << "\n";
-    }
-
-    // Print edges list
-    cout << "\nEdges:\n";
-    for (int i = 0; i < n; ++i) {
+    cout << "\nCurrent Graph (Adjacency List):\n";
+    for (int i = 1; i <= n; ++i) {
+        cout << i << " -> ";
         for (int neighbor : graph[i]) {
-            cout << (i + 1) << " -> " << (neighbor + 1) << "\n"; // Print the edges
+            cout << neighbor << " ";
         }
+        cout << endl;
     }
 }
 
@@ -106,11 +90,11 @@ void KosarajuVectorList::dfsSecondPass(int node, vector<int>& scc) {
 }
 
 void KosarajuVectorList::addEdge(int u, int v) {
-    graph[u - 1].push_back(v - 1); // Add edge to the graph
-    transposedGraph[v - 1].push_back(u - 1); // Add edge to the transposed graph
+    graph[u].push_back(v); // Add edge to the graph
+    transposedGraph[v].push_back(u); // Add edge to the transposed graph
 }
 
 void KosarajuVectorList::removeEdge(int u, int v) {
-    graph[u - 1].remove(v - 1); // Remove edge from the graph
-    transposedGraph[v - 1].remove(u - 1); // Remove edge from the transposed graph
+    graph[u].erase(remove(graph[u].begin(), graph[u].end(), v), graph[u].end()); // Remove edge from the graph
+    transposedGraph[v].erase(remove(transposedGraph[v].begin(), transposedGraph[v].end(), u), transposedGraph[v].end()); // Remove edge from the transposed graph
 }

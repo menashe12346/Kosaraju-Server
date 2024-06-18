@@ -1,18 +1,32 @@
 #include "kosaraju_vector_list.hpp"
 
 KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edges) : n(n) {
-    graph.resize(n);  // Initialize the graph with n nodes
-    transposedGraph.resize(n);  // Initialize the transposed graph with n nodes
-    visited.resize(n, false);  // Initialize the visited vector with false
+    // Initialize the graph with n+1 nodes to accommodate 1-based indexing
+    graph.resize(n + 1);
+    // Initialize the transposed graph with n+1 nodes to accommodate 1-based indexing
+    transposedGraph.resize(n + 1);
+    // Initialize the visited vector with n+1 nodes to accommodate 1-based indexing
+    visited.resize(n + 1, false);
     for (const auto& edge : edges) {
-        graph[edge.first - 1].push_back(edge.second - 1);  // Add edge to the graph (convert to zero-based index)
-        transposedGraph[edge.second - 1].push_back(edge.first - 1);  // Add edge to the transposed graph (convert to zero-based index)
+        // Add edge to the graph (convert to one-based index)
+        graph[edge.first].push_back(edge.second);
+        // Add edge to the transposed graph (convert to one-based index)
+        transposedGraph[edge.second].push_back(edge.first);
     }
 }
 
+const std::vector<std::vector<int>>& KosarajuVectorList::getSCCs() const {
+    return sccs;
+}
+
 void KosarajuVectorList::findSCCs() {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
     // First Pass
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (!visited[i]) {
             dfsFirstPass(i);  // Perform DFS to fill the finish stack
         }
@@ -37,7 +51,7 @@ void KosarajuVectorList::printSCCs() const {
     for (const auto& scc : sccs) {
         cout << "SCC " << sccCount++ << ": ";
         for (int node : scc) {
-            cout << node + 1 << " ";  // Convert back to 1-based index for output
+            cout << node << " ";  // Output the node (already adjusted for 1-based index)
         }
         cout << endl << "----------------" << endl;
     }

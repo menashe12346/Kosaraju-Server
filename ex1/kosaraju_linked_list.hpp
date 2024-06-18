@@ -46,6 +46,8 @@ public:
     /// @param edges The edges of the graph
     KosarajuLinkedList(int n, const vector<pair<int, int>>& edges);
 
+    const std::vector<LinkedList>& getSCCs() const;
+
     /// @brief Finds and stores the strongly connected components (SCCs) of the graph
     void findSCCs();
 

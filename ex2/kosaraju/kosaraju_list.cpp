@@ -1,23 +1,32 @@
 #include "kosaraju_list.hpp"
 
 KosarajuList::KosarajuList(int n, const vector<pair<int, int>>& edges) : n(n) {
-    graph.resize(n);  // Resize the graph to hold n nodes
-    transposedGraph.resize(n);  // Resize the transposed graph
-    visited.resize(n, false);  // Initialize visited vector with false
+    graph.resize(n + 1);  // Resize the graph to hold n+1 nodes (1-based index)
+    transposedGraph.resize(n + 1);  // Resize the transposed graph
+    visited.resize(n + 1, false);  // Initialize visited vector with false
     for (const auto& edge : edges) {
         if (edge.first > 0 && edge.first <= n && edge.second > 0 && edge.second <= n) {
-            auto itGraph = next(graph.begin(), edge.first - 1);  // Convert to zero-based index
-            auto itTransposedGraph = next(transposedGraph.begin(), edge.second - 1);  // Convert to zero-based index
-            itGraph->push_back(edge.second - 1);  // Add edge to the graph (zero-based index)
-            itTransposedGraph->push_back(edge.first - 1);  // Add edge to the transposed graph (zero-based index)
+            auto itGraph = next(graph.begin(), edge.first);  // Use 1-based index
+            auto itTransposedGraph = next(transposedGraph.begin(), edge.second);  // Use 1-based index
+            itGraph->push_back(edge.second);  // Add edge to the graph (1-based index)
+            itTransposedGraph->push_back(edge.first);  // Add edge to the transposed graph (1-based index)
         } else {
             cerr << "Invalid edge: (" << edge.first << ", " << edge.second << ")" << endl;  // Print error for invalid edges
         }
     }
 }
 
+const std::list<std::list<int>>& KosarajuList::getSCCs() const {
+    return sccs;
+}
+
 void KosarajuList::findSCCs() {
-    for (int i = 0; i < n; ++i) {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
+    for (int i = 1; i <= n; ++i) {  // Start loop from 1 instead of 0
         auto itVisited = next(visited.begin(), i);
         if (!(*itVisited)) {
             dfsFirstPass(i);  // Perform DFS to fill the finish stack

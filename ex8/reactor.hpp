@@ -79,10 +79,17 @@ struct ProactorArg {
 
 // Function prototypes for proactor
 
-/// @brief Starts a new proactor thread.
-/// @param sockfd File descriptor for the socket.
-/// @param threadFunc Function to run in the new thread.
-/// @return Thread ID of the created thread.
+/**
+ * @brief Starts a new proactor thread to handle a client connection.
+ * 
+ * This function creates a new thread to handle the client connection using a
+ * proactor pattern. It wraps the socket file descriptor and the handling function
+ * into a structure that is passed to the new thread.
+ * 
+ * @param sockfd The socket file descriptor of the client connection.
+ * @param threadFunc The function to handle the client connection.
+ * @return pthread_t The ID of the newly created thread.
+ */
 pthread_t startProactor(int sockfd, proactorFunc threadFunc);
 
 /// @brief Stops a proactor thread.

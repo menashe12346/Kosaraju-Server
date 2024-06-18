@@ -1,4 +1,8 @@
 #include "kosaraju_vector_list.hpp"
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
 
 KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edges) : n(n) {
     graph.resize(n);
@@ -11,22 +15,28 @@ KosarajuVectorList::KosarajuVectorList(int n, const vector<pair<int, int>>& edge
 }
 
 void KosarajuVectorList::findSCCs() {
+    sccs.clear(); // Clear the SCCs vector before finding SCCs
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
+    while (!finishStack.empty()) {
+        finishStack.pop(); // Clear the finish stack
+    }
+
     // First Pass
     for (int i = 0; i < n; ++i) {
         if (!visited[i]) {
-            dfsFirstPass(i); // Perform DFS on unvisited nodes
+            dfsFirstPass(i); // Perform DFS to fill the finish stack
         }
     }
 
     // Second Pass
-    fill(visited.begin(), visited.end(), false); // Reset visited vector
+    fill(visited.begin(), visited.end(), false); // Reset the visited vector
     while (!finishStack.empty()) {
-        int node = finishStack.top(); // Get the next node from the stack
+        int node = finishStack.top();
         finishStack.pop();
         if (!visited[node]) {
             vector<int> scc;
-            dfsSecondPass(node, scc); // Perform DFS on the transposed graph
-            sccs.push_back(scc); // Add the SCC to the list
+            dfsSecondPass(node, scc); // Perform DFS to find SCCs
+            sccs.push_back(scc);
         }
     }
 }
@@ -76,8 +86,8 @@ void KosarajuVectorList::addEdge(int u, int v) {
 }
 
 void KosarajuVectorList::removeEdge(int u, int v) {
-    graph[u - 1].remove(v - 1); // Remove edge from the graph
-    transposedGraph[v - 1].remove(u - 1); // Remove edge from the transposed graph
+    graph[u - 1].erase(remove(graph[u - 1].begin(), graph[u - 1].end(), v - 1), graph[u - 1].end()); // Remove edge from the graph
+    transposedGraph[v - 1].erase(remove(transposedGraph[v - 1].begin(), transposedGraph[v - 1].end(), u - 1), transposedGraph[v - 1].end()); // Remove edge from the transposed graph
 }
 
 void KosarajuVectorList::dfsFirstPass(int node) {
@@ -101,13 +111,11 @@ void KosarajuVectorList::dfsSecondPass(int node, vector<int>& scc) {
 }
 
 int KosarajuVectorList::largestSCCSize() const {
-    std::vector<int>::size_type maxSize = 0;
+    int maxSize = 0;
     for (const auto& scc : sccs) {
         if (scc.size() > maxSize) {
             maxSize = scc.size();
         }
     }
-    return static_cast<int>(maxSize);
+    return maxSize;
 }
-
-
