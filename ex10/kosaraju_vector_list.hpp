@@ -44,6 +44,10 @@ public:
     /// @return A vector of SCCs, where each SCC is represented as a vector of integers.
     vector<vector<int>> getSCCs() const { return sccs; }
 
+    /// @brief Function to get the size of the largest SCC.
+    /// @return The size of the largest SCC.
+    int largestSCCSize() const;
+
 private:
     int n; ///< Number of vertices in the graph.
     vector<list<int>> graph; ///< Adjacency list representation of the graph.

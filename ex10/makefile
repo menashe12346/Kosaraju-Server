@@ -2,7 +2,7 @@
 
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic -g
-LDFLAGS = -lpthread 
+LDFLAGS = -lpthread # for POSIX threads
 
 all: server client
 

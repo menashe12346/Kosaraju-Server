@@ -6,205 +6,178 @@
 #include <cstring>
 #include <algorithm>
 #include <mutex>
-#include <queue>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <pthread.h>
 #include <sstream>
+#include <condition_variable>
 #include "kosaraju_vector_list.hpp"
 #include "../ex8/reactor.hpp"
 
 using namespace std;
 
+/// Mutex for synchronizing access to the graph
 mutex graphMutex;
+/// Condition variable for signaling the monitoring thread
+condition_variable graphCondVar;
+/// Pointer to the current graph
 KosarajuVectorList* graph = nullptr;
-pthread_cond_t conditionVar = PTHREAD_COND_INITIALIZER;
-pthread_cond_t queueConditionVar = PTHREAD_COND_INITIALIZER;
-mutex queueMutex;
-queue<pair<int, string>> commandQueue;
-bool computationDone = false;
+/// Flag to indicate if 50% SCC condition is met
 bool sccConditionMet = false;
-bool isServerRunning = true;
 
+/// @brief Processes commands received from the client.
+/// @param clientSocket The socket of the client.
+/// @param command The command received from the client.
 void processCommand(int clientSocket, const string& command);
 
-void* handleClient(int sockfd) {
-    cout << "Client handler started for socket " << sockfd << endl;
+/// @brief Handles a connected client.
+/// @param clientSocket The socket of the client.
+/// @return nullptr
+void* handleClient(int clientSocket) {
     char buffer[1024];
-    memset(buffer, 0, 1024);
+    memset(buffer, 0, 1024); // Clear the buffer
     int nbytes;
-    while ((nbytes = read(sockfd, buffer, 1023)) > 0) {
-        cout << "Received from client: " << buffer << endl;
-        unique_lock<mutex> lock(queueMutex);
-        commandQueue.push(make_pair(sockfd, string(buffer)));
-        pthread_cond_signal(&queueConditionVar);
+    while ((nbytes = read(clientSocket, buffer, 1023)) > 0) { // Read data from client
+        processCommand(clientSocket, string(buffer)); // Process the command
+        memset(buffer, 0, 1024); // Clear the buffer for the next read
     }
     
     if (nbytes == 0) {
-        cout << "Socket " << sockfd << " hung up" << endl;
+        cout << "Socket " << clientSocket << " hung up" << endl; // Log if the client disconnected
     } else {
-        cerr << "Error on read" << endl;
+        cerr << "Error on read" << endl; // Log read error
     }
 
-    close(sockfd);
+    close(clientSocket); // Close the socket
     return nullptr;
 }
 
-void checkGraphSCC() {
-    graphMutex.lock();
-    if (graph) {
-        graph->findSCCs();
-        vector<vector<int>> sccs = graph->getSCCs();
-        size_t maxSCCSize = 0;
-        for (const auto& scc : sccs) {
-            if (scc.size() > maxSCCSize) {
-                maxSCCSize = scc.size();
-            }
-        }
-        bool newSccConditionMet = maxSCCSize >= static_cast<size_t>(graph->getNumVertices()) / 2;
-        if (newSccConditionMet != sccConditionMet) {
-            sccConditionMet = newSccConditionMet;
-            if (sccConditionMet) {
-                cout << "At Least 50% of the graph belongs to the same SCC" << endl;
-            } else {
-                cout << "At Least 50% of the graph no longer belongs to the same SCC" << endl;
-            }
-            pthread_cond_broadcast(&conditionVar);
-        }
-        graphMutex.unlock();
-    } else {
-        graphMutex.unlock();
-    }
-}
-
+/// @brief Processes commands received from the client.
+/// @param clientSocket The socket of the client.
+/// @param command The command received from the client.
 void processCommand(int clientSocket, const string& command) {
-    cout << "Processing command: " << command << endl;
     string response;
-    static int edgesToReceive = 0;
-    static vector<pair<int, int>> edges;
-
     if (command.find("NewGraph") == 0) {
         int n, m;
-        sscanf(command.c_str(), "NewGraph %d %d", &n, &m);
-        edgesToReceive = m;
-        edges.clear();
-        edges.resize(m);
+        sscanf(command.c_str(), "NewGraph %d %d", &n, &m); // Parse the number of vertices and edges
+        vector<pair<int, int>> edges(m); // Create a vector to store edges
         response = "Creating new graph...\n";
         response += "Number of vertices: " + to_string(n) + ", Number of edges: " + to_string(m) + "\n";
         response += "Please provide the edges one by one:\n";
-        write(clientSocket, response.c_str(), response.size());
-    } else if (edgesToReceive > 0) {
-        int u, v;
-        sscanf(command.c_str(), "%d %d", &u, &v);
-        edges[edges.size() - edgesToReceive] = {u, v};
-        response = "Edge " + to_string(edges.size() - edgesToReceive + 1) + ": " + to_string(u) + " -> " + to_string(v) + "\n";
-        write(clientSocket, response.c_str(), response.size());
-        edgesToReceive--;
-        if (edgesToReceive == 0) {
-            graphMutex.lock();
-            delete graph;
-            graph = new KosarajuVectorList(edges.size(), edges);
-            graphMutex.unlock();
-            response = "Graph created successfully with " + to_string(edges.size()) + " vertices and " + to_string(edges.size()) + " edges\n";
-            write(clientSocket, response.c_str(), response.size());
-
-            stringstream ss;
-            streambuf* coutbuf = cout.rdbuf();
-            cout.rdbuf(ss.rdbuf());
-            graph->printGraph();
-            cout.rdbuf(coutbuf);
-            response = ss.str();
-            write(clientSocket, response.c_str(), response.size());
-
-            cout << "Graph created with " << edges.size() << " vertices and " << edges.size() << " edges" << endl;
+        write(clientSocket, response.c_str(), response.size()); // Send response to client
+        
+        for (int i = 0; i < m; ++i) { // Loop to receive edges from the client
+            char buffer[1024];
+            memset(buffer, 0, 1024); // Clear the buffer
+            read(clientSocket, buffer, 1023); // Read edge from client
+            sscanf(buffer, "%d %d", &edges[i].first, &edges[i].second); // Parse the edge
+            response = "Edge " + to_string(i + 1) + ": " + to_string(edges[i].first) + " -> " + to_string(edges[i].second) + "\n";
+            write(clientSocket, response.c_str(), response.size()); // Send edge information back to client
         }
+        
+        graphMutex.lock(); // Lock the graph mutex
+        delete graph; // Delete the existing graph
+        graph = new KosarajuVectorList(n, edges); // Create a new graph with the provided edges
+        sccConditionMet = false; // Reset the SCC condition flag
+        graphMutex.unlock(); // Unlock the graph mutex
+        response = "Graph created successfully with " + to_string(n) + " vertices and " + to_string(m) + " edges\n";
+        write(clientSocket, response.c_str(), response.size()); // Send confirmation to client
+
+        stringstream ss;
+        streambuf* coutbuf = cout.rdbuf(); // Save old buffer
+        cout.rdbuf(ss.rdbuf()); // Redirect cout to stringstream
+        graph->printGraph(); // Print the graph
+        cout.rdbuf(coutbuf); // Reset cout to its old buffer
+        response = ss.str(); // Get the string from stringstream
+        write(clientSocket, response.c_str(), response.size()); // Send graph structure to client
+
+        cout << "Graph created with " << n << " vertices and " << m << " edges" << endl; // Log to console
     } else if (command.find("Kosaraju") == 0) {
-        graphMutex.lock();
+        graphMutex.lock(); // Lock the graph mutex
         if (graph) {
-            graph->findSCCs();
+            graph->findSCCs(); // Find strongly connected components
             stringstream ss;
-            streambuf* coutbuf = cout.rdbuf();
-            cout.rdbuf(ss.rdbuf());
-            graph->printSCCs();
-            cout.rdbuf(coutbuf);
+            streambuf* coutbuf = cout.rdbuf(); // Save old buffer
+            cout.rdbuf(ss.rdbuf()); // Redirect cout to stringstream
+            graph->printSCCs(); // Print SCCs
+            cout.rdbuf(coutbuf); // Reset cout to its old buffer
             response = ss.str();
             response += "Kosaraju algorithm executed\n";
-            write(clientSocket, response.c_str(), response.size());
-            cout << "Kosaraju algorithm executed" << endl;
-        }
-        graphMutex.unlock();
+            write(clientSocket, response.c_str(), response.size()); // Send response to client
+            cout << "Kosaraju algorithm executed" << endl; // Log to console
 
-        // Check the graph SCC after Kosaraju execution
-        checkGraphSCC();
+            // Check SCC condition
+            int largestSCC = graph->largestSCCSize();
+            if (largestSCC >= graph->getNumVertices() / 2) {
+                if (!sccConditionMet) {
+                    sccConditionMet = true;
+                    graphCondVar.notify_all(); // Notify the monitoring thread
+                }
+            } else {
+                if (sccConditionMet) {
+                    sccConditionMet = false;
+                    graphCondVar.notify_all(); // Notify the monitoring thread
+                }
+            }
+        }
+        graphMutex.unlock(); // Unlock the graph mutex
     } else if (command.find("NewEdge") == 0) {
         int u, v;
-        sscanf(command.c_str(), "NewEdge %d %d", &u, &v);
-        graphMutex.lock();
+        sscanf(command.c_str(), "NewEdge %d %d", &u, &v); // Parse the edge to add
+        graphMutex.lock(); // Lock the graph mutex
         if (graph) {
-            graph->addEdge(u, v);
+            graph->addEdge(u, v); // Add the edge
             response = "Edge added successfully: " + to_string(u) + " -> " + to_string(v) + "\n";
-            write(clientSocket, response.c_str(), response.size());
-            cout << "Edge added: " << u << " -> " << v << endl;
+            write(clientSocket, response.c_str(), response.size()); // Send confirmation to client
+            cout << "Edge added: " << u << " -> " << v << endl; // Log to console
         }
-        graphMutex.unlock();
-
-        // Check the graph SCC after adding an edge
-        checkGraphSCC();
+        graphMutex.unlock(); // Unlock the graph mutex
     } else if (command.find("RemoveEdge") == 0) {
         int u, v;
-        sscanf(command.c_str(), "RemoveEdge %d %d", &u, &v);
-        graphMutex.lock();
+        sscanf(command.c_str(), "RemoveEdge %d %d", &u, &v); // Parse the edge to remove
+        graphMutex.lock(); // Lock the graph mutex
         if (graph) {
-            graph->removeEdge(u, v);
+            graph->removeEdge(u, v); // Remove the edge
             response = "Edge removed successfully: " + to_string(u) + " -> " + to_string(v) + "\n";
-            write(clientSocket, response.c_str(), response.size());
-            cout << "Edge removed: " << u << " -> " << v << endl;
+            write(clientSocket, response.c_str(), response.size()); // Send confirmation to client
+            cout << "Edge removed: " << u << " -> " << v << endl; // Log to console
         }
-        graphMutex.unlock();
-
-        // Check the graph SCC after removing an edge
-        checkGraphSCC();
+        graphMutex.unlock(); // Unlock the graph mutex
     } else if (command.find("PrintGraph") == 0) {
-        graphMutex.lock();
+        graphMutex.lock(); // Lock the graph mutex
         if (graph) {
             stringstream ss;
-            streambuf* coutbuf = cout.rdbuf();
-            cout.rdbuf(ss.rdbuf());
-            graph->printGraph();
-            cout.rdbuf(coutbuf);
+            streambuf* coutbuf = cout.rdbuf(); // Save old buffer
+            cout.rdbuf(ss.rdbuf()); // Redirect cout to stringstream
+            graph->printGraph(); // Print the graph
+            cout.rdbuf(coutbuf); // Reset cout to its old buffer
             response = ss.str();
-            write(clientSocket, response.c_str(), response.size());
+            write(clientSocket, response.c_str(), response.size()); // Send graph structure to client
         }
-        graphMutex.unlock();
+        graphMutex.unlock(); // Unlock the graph mutex
     } else if (command.find("exit") == 0) {
         response = "Exiting...\n";
-        write(clientSocket, response.c_str(), response.size());
+        write(clientSocket, response.c_str(), response.size()); // Send response to client
     } else {
         response = "Invalid command\n";
-        write(clientSocket, response.c_str(), response.size());
+        write(clientSocket, response.c_str(), response.size()); // Send response to client
     }
 }
 
-void* consumerThread(void*) {
-    while (isServerRunning) {
-        unique_lock<mutex> lock(queueMutex);
-        while (commandQueue.empty() && isServerRunning) {
-            pthread_cond_wait(&queueConditionVar, queueMutex.native_handle());
+/// @brief Monitoring thread function.
+/// @return nullptr
+void* monitorGraph(void*) {
+    unique_lock<mutex> lock(graphMutex);
+    while (true) {
+        graphCondVar.wait(lock, []{ return sccConditionMet; }); // Wait for the SCC condition to be met
+        if (sccConditionMet) {
+            cout << "At Least 50% of the graph belongs to the same SCC\n";
+        } else {
+            cout << "At Least 50% of the graph no longer belongs to the same SCC\n";
         }
-
-        if (!isServerRunning) {
-            break;
-        }
-
-        auto commandPair = commandQueue.front();
-        commandQueue.pop();
-        lock.unlock();
-
-        processCommand(commandPair.first, commandPair.second);
     }
-
     return nullptr;
 }
 
@@ -213,49 +186,46 @@ int main() {
     struct sockaddr_in serverAddr, clientAddr;
     socklen_t addrLen = sizeof(clientAddr);
 
-    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0); // Create a socket
     if (serverSocket < 0) {
-        cerr << "Error opening socket" << endl;
+        cerr << "Error opening socket" << endl; // Log error if socket creation fails
         return 1;
     }
 
     int opt = 1;
     if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
-        cerr << "Error setting socket options" << endl;
+        cerr << "Error setting socket options" << endl; // Log error if setting options fails
         return 1;
     }
 
-    memset((char*)&serverAddr, 0, sizeof(serverAddr));
+    memset((char*)&serverAddr, 0, sizeof(serverAddr)); // Clear the server address structure
     serverAddr.sin_family = AF_INET;
-    serverAddr.sin_addr.s_addr = INADDR_ANY;
-    serverAddr.sin_port = htons(9034);
+    serverAddr.sin_addr.s_addr = INADDR_ANY; // 0.0.0.0 in IPv4, it will accept connections on all available networks.
+    serverAddr.sin_port = htons(9034); // Convert the port number to network byte order
 
-    if (bind(serverSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-        cerr << "Error on binding" << endl;
+    if (bind(serverSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) { // Bind the socket
+        cerr << "Error on binding" << endl; // Log error if binding fails
         return 1;
     }
 
-    listen(serverSocket, 5);
-    cout << "Server started on port 9034" << endl;
+    listen(serverSocket, 5); // Listen for connections
+    cout << "Server started on port 9034" << endl; // Log server start
 
-    pthread_t consumerTid;
-    pthread_create(&consumerTid, nullptr, consumerThread, nullptr);
+    // Start the monitoring thread
+    pthread_t monitorThread;
+    pthread_create(&monitorThread, nullptr, monitorGraph, nullptr);
 
     while (true) {
-        clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &addrLen);
+        clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &addrLen); // Accept new connection
         if (clientSocket == -1) {
-            cerr << "Error on accept" << endl;
+            cerr << "Error on accept" << endl; // Log error if accept fails
         } else {
-            cout << "New connection on socket " << clientSocket << endl;
-            pthread_t tid = startProactor(clientSocket, handleClient);
+            cout << "New connection on socket " << clientSocket << endl; // Log new connection
+            pthread_t tid = startProactor(clientSocket, handleClient); // Start proactor thread for the client
             pthread_detach(tid); // Detach the thread so that it cleans up after itself
         }
     }
 
-    isServerRunning = false;
-    pthread_cond_broadcast(&queueConditionVar);
-    pthread_join(consumerTid, nullptr);
-
-    close(serverSocket);
+    close(serverSocket); // Close the server socket
     return 0;
 }
