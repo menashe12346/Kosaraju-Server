@@ -11,7 +11,7 @@ Available commands:
                                 3 4
                                 4 5
                                 5 1
-                    2) NewEdge u v
+                    2) NewEdge 1 3
                     3) RemoveEdge 3 4
                     4) Kosaraju
                     5) PrintGraph
