@@ -1,0 +1,21 @@
+run the server:
+                ./ex9/server
+            
+run the client:
+                ./ex9/client
+        
+Available commands:
+                    1) NewGraph 5 5
+                                1 2
+                                2 3
+                                3 4
+                                4 5
+                                5 1
+                    2) NewEdge u v
+                    3) RemoveEdge 3 4
+                    4) Kosaraju
+                    5) PrintGraph
+                    6) Exit
+                    7) help
+
+
